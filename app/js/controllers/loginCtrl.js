@@ -1,12 +1,8 @@
-angular.module('dw.LoginCtrl', ['ngRoute'])
+angular.module('dw.LoginCtrl', ['ngRoute', 'dw.QuestionsServ'])
 
-    .controller('LoginController', function ($scope, $http) {
-        $http.get('http://localhost/dual-wine/public/api/question').
-            success(function(data, status, headers, config){
-                $scope.posts = data;
-            }).
-            error(function(data, status, headers, config){
-               // Error.
-            });
+    .controller('LoginController', ['$scope', 'Questions', function($scope, Questions) {
+        $scope.question = Questions.getQuestions(function(data){
+            console.log($scope.questions);
 
-    });
+        });
+    }]);
