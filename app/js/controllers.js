@@ -1,0 +1,1 @@
+angular.module('dwControllers', ['dw.StartCtrl', 'dw.LoginCtrl', 'dw.RegisterCtrl']);

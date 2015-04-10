@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="dwApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Dual Wine</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-route/angular-route.min.js"></script>
+    <script src="../node_modules/angular-resource/angular-resource.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/factory/questions.js"></script>
+    <script src="js/controllers/startCtrl.js"></script>
+    <script src="js/controllers/loginCtrl.js"></script>
+    <script src="js/controllers/registerCtrl.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <a href="#/login" class="btn btn-sm btn-primary">Connexion</a>
+        <a href="#/register" class="btn btn-sm btn-primary">Inscription</a>
+        <a href="#/start" class="btn btn-sm btn-primary">Start</a>
+        <div ng-view></div>
+    </div>
+</div>
+
+
+</body>
+</html>
