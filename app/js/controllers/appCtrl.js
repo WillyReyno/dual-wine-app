@@ -1,4 +1,4 @@
-angular.module('dw.AppCtrl', [])
+angular.module('dw.AppCtrl', ['dw.AuthService'])
     .controller('ApplicationController', function($scope, USER_ROLES, AuthService) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
