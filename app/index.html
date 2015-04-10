@@ -7,27 +7,52 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/angular/angular.min.js"></script>
     <script src="../node_modules/angular-route/angular-route.min.js"></script>
-    <!--<script src="../node_modules/angular-resource/angular-resource.min.js"></script>-->
+    <script src="../node_modules/angular-resource/angular-resource.min.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <script src="js/app.js"></script>
+
     <script src="js/controllers.js"></script>
+    <script src="js/controllers/appCtrl.js"></script>
     <script src="js/controllers/startCtrl.js"></script>
     <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/services/questions.js"></script>
     <script src="js/controllers/registerCtrl.js"></script>
+
+    <script src="js/directives/formAutofillFix.js"></script>
+    <script src="js/directives/loginDialog.js"></script>
+
+    <script src="js/factory/auth.js"></script>
+    <script src="js/factory/authInterceptor.js"></script>
+    <script src="js/factory/authResolver.js"></script>
+    <script src="js/factory/questions.js"></script>
+
+    <script src="js/services/session.js"></script>
+
 </head>
-<body>
+<body ng-controller="ApplicationController">
 <div class="container">
     <div class="row">
+        <a href="#/start" class="btn btn-sm btn-primary">Start</a>
         <a href="#/login" class="btn btn-sm btn-primary">Connexion</a>
         <a href="#/register" class="btn btn-sm btn-primary">Inscription</a>
-        <a href="#/start" class="btn btn-sm btn-primary">Start</a>
+        {{currentUser}}
+        <div ng-if="currentUser">Bienvenue, {{currentUser }}</div>
+        <div ng-if="isAuthorized(userRoles.admin)">Vous êtes admin !</div>
+
+        <div ng-switch on="currentUser.role">
+            <div ng-switch-when="userRoles.admin">Vous êtes admin !</div>
+            <div ng-switch-when="userRoles.editor">Vous êtes éditeur !</div>
+            <div ng-switch-default>Vous êtes autre chose !</div>
+        </div>
+
+
         <div ng-view></div>
     </div>
 </div>
 
-
+<!--<div login-dialog ng-if="!isLoginPage">lol</div>-->
 </body>
 </html>
