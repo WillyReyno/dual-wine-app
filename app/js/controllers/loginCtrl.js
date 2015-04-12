@@ -8,30 +8,20 @@ angular.module('dw.LoginCtrl', [])
             password: ''
         };
 
-        $scope.submitLoginForm = function(credentials) {
-            var url = "http://localhost/dual-wine/public/api/auth/login";
-            $http.post(url, credentials)
-                .success(function(data, status, headers, config){
-                    if(data.login) {
-                        console.log('true !');
-                        AuthService.login(credentials).then(function(user){
-                            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                            $scope.setCurrentUser(user);
-                        }, function() {
-                            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                        })
-
-                    } else {
-                        alert("false");
-                    }
-                })
-                .error(function(data, status, headers, config){
-                    //Todo en cas d'erreur
-                });
-
-
+        $scope.submitLoginForm = function (credentials) {
+            AuthService.login(credentials).then(function (res) { // je n'arrive pas à récupérer user, uniquement les data..
+                if(res.data.login) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    $scope.setCurrentUser(res.data.user);
+                } else {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
+                }
+            }, function () {
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            });
         };
     })
+    //TODO : les constantes ne doivent pas se trouver dans le controller !! Je t'ai crée un dossier et un fichier value (tu peux le renommer)
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',
