@@ -3,7 +3,8 @@ angular.module('dwApp', [
     'dwControllers', 'dw.AppCtrl',
     'dw.SessionService',
     'dw.AuthService', 'dw.QuestionsService', 'dw.AuthResolver', 'dw.AuthInterceptor',
-    'dw.formAutofillFix', 'dw.loginDialog'])
+    'dw.formAutofillFix', 'dw.loginDialog',
+    'dwValues'])
     //.config(function($stateProvider, USER_ROLES) {
     //    $stateProvider.state('dashboard', {
     //        url: '/dashboard',
@@ -23,16 +24,10 @@ angular.module('dwApp', [
     //})
     .run(function($rootScope, AUTH_EVENTS, AuthService) {
         $rootScope.$on('$stateChangeStart', function(event, next) {
-            var authorizedRoles = next.data.authorizedRoles;
-            if(!AuthService.isAuthorized(authorizedRoles)) {
+
+            if(!AuthService.isAuthenticated()) {
                 event.preventDefault();
-                if (AuthService.isAuthenticated()) {
-                    // user is not allowed
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-                } else {
-                    // user is not logged in
-                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-                }
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
             }
         });
     })

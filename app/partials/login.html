@@ -2,13 +2,9 @@
     <h2>Connexion</h2>
     <li ng-repeat="dataquestion in dataquestions">{{dataquestion.question}}</li>
 
-    <iframe src="sink.html" name="sink"
-            style="display:none"></iframe>
+    <iframe src="sink.html" name="sink" style="display:none"></iframe>
 
-    <form name="loginForm" action="sink.html" target="sink" method="post"
-          ng-submit="submitLoginForm(fields)"
-            novalidate form-autofill-fix>
-
+    <form name="loginForm" action="sink.html" target="sink" method="post" ng-submit="submitLoginForm(fields)" novalidate form-autofill-fix>
         <div class="form-group">
             <input ng-model="fields.email" type="email" name="email" class="form-control" placeholder="Identifiant">
         </div>

@@ -7,24 +7,25 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-    <!-- COMMENT
+    <!-- TODO
         ça fait beaucoup de dépendances à gérer à la main ! Il faut installer gulp (https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
         Créer un fichier gulpfile.js, dedans tu mettras une tâche vendors, et elle devra concaténer + min tous les js dans node_modules et ça fera un vendor.js
         pareil pour tout ce qu'il y a dans js, ça fera un script.js
         script.js + vendor.js dans un dossier "prod", et ça nous fait que deux fichiers à linker ! Faut rajouter un système de mapping aussi, sinon les erreurs seront dans le fichier min
         Regarde celui de Tobia sur laravel, si besoin je t'envoie le mien de mad, et au pire demande à tobia ou moi de le faire
     -->
-   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-   <script src="../node_modules/angular/angular.min.js"></script>
-   <script src="../node_modules/angular-route/angular-route.min.js"></script>
-   <script src="../node_modules/angular-resource/angular-resource.min.js"></script>
-   <!-- COMMENT
-       Ce script n'existe pas ! Il manque un fichier ?
-       <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-   -->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-route/angular-route.min.js"></script>
+    <script src="../node_modules/angular-resource/angular-resource.min.js"></script>
+    <!-- TODO
+        Ce script n'existe pas ! Il manque un fichier ?
+        <script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    -->
     <script src="js/app.js"></script>
 
     <script src="js/controllers.js"></script>
+    <script src="js/values/values.js"></script>
     <script src="js/controllers/appCtrl.js"></script>
     <script src="js/controllers/startCtrl.js"></script>
     <script src="js/controllers/loginCtrl.js"></script>
@@ -45,20 +46,14 @@
 <div class="container">
     <div class="row">
         <a href="#/start" class="btn btn-sm btn-primary">Start</a>
-        <a href="#/login" class="btn btn-sm btn-primary">Connexion</a>
-        <a href="#/register" class="btn btn-sm btn-primary">Inscription</a>
-        <div ng-if="currentUser">Bienvenue, {{currentUser.username }}</div>
-        <div ng-if="isAuthorized(userRoles.admin)">Vous êtes admin !</div>
-
-        <div ng-switch on="currentUser.role">
-            <!-- COMMENT
-                les rôles sont des chiffres pour le moment
-            -->
-            <div ng-switch-when="userRoles.admin">Vous êtes admin !</div>
-            <div ng-switch-when="userRoles.editor">Vous êtes éditeur !</div>
-            <div ng-switch-default>Vous êtes autre chose !</div>
-        </div>
-
+        <span ng-if="!currentUser">
+            <a href="#/login" class="btn btn-sm btn-primary">Connexion</a>
+            <a href="#/register" class="btn btn-sm btn-primary">Inscription</a>
+        </span>
+        <span ng-if="currentUser">
+            <button ng-click="logout()" class="btn btn-sm btn-primary">Déconnexion</button>
+            <div ng-if="currentUser">Bienvenue, {{currentUser.username }}</div>
+        </span>
 
         <div ng-view></div>
     </div>
