@@ -8,42 +8,18 @@ angular.module('dw.LoginCtrl', [])
             password: ''
         };
 
-        $scope.submitLoginForm = function(credentials) {
-            var url = "http://localhost/dual-wine/public/api/auth/login";
-            $http.post(url, credentials)
-                .success(function(data, status, headers, config){
-                    if(data.login) {
-                        console.log('true !');
-                        AuthService.login(credentials).then(function(user){
-                            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                            $scope.setCurrentUser(user);
-                        }, function() {
-                            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                        })
+        $scope.submitLoginForm = function (credentials) {
+            AuthService.login(credentials).then(function (res) { // je n'arrive pas à récupérer user, uniquement les data..
+                if(res.data.login) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    $scope.setCurrentUser(res.data.user);
 
-                    } else {
-                        alert("false");
-                    }
-                })
-                .error(function(data, status, headers, config){
-                    //Todo en cas d'erreur
-                });
-
-
+                } else {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
+                }
+            }, function () {
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            });
         };
-    })
-    .constant('AUTH_EVENTS', {
-        loginSuccess: 'auth-login-success',
-        loginFailed: 'auth-login-failed',
-        logoutSuccess: 'auth-logout-success',
-        sessionTimeout: 'auth-session-timeout',
-        notAuthenticated: 'auth-not-authenticated',
-        notAuthorized: 'auth-not-authorized'
-    })
-    .constant('USER_ROLES', {
-        all: '*',
-        admin: 'admin',
-        editor: 'editor',
-        guest: 'guest'
     });
 

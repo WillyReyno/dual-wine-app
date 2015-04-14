@@ -1,10 +1,13 @@
 angular.module('dw.AppCtrl', ['dw.AuthService'])
-    .controller('ApplicationController', function($scope, USER_ROLES, AuthService) {
+    .controller('ApplicationController', function($scope, Session) {
         $scope.currentUser = null;
-        $scope.userRoles = USER_ROLES;
-        $scope.isAuthorized = AuthService.isAuthorized;
 
         $scope.setCurrentUser = function(user) {
             $scope.currentUser = user;
+        };
+
+        $scope.logout = function () {
+            // TODO not working
+            Session.destroy();
         };
     });
