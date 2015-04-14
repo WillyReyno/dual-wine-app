@@ -1,9 +1,7 @@
 angular.module('dwApp', [
     'ngRoute',
-    'dwControllers', 'dw.AppCtrl',
-    'dw.SessionService',
-    'dw.AuthService', 'dw.QuestionsService', 'dw.AuthResolver', 'dw.AuthInterceptor',
-    'dw.formAutofillFix', 'dw.loginDialog',
+    'dwLogin', 'dwStart', 'dwRegister', 'dwApplication',
+    'dwQuestionsService',
     'dwValues'])
     //.config(function($stateProvider, USER_ROLES) {
     //    $stateProvider.state('dashboard', {
@@ -63,4 +61,4 @@ angular.module('dwApp', [
                 });
         }]);
 
-
+angular.module("dwLogin", []);

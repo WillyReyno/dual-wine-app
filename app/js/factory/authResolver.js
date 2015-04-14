@@ -1,4 +1,4 @@
-angular.module('dw.AuthResolver', [])
+angular.module('dwLogin')
     .factory('AuthResolver', function($q, $rootScope, $state){
         return {
             resolve: function() {
