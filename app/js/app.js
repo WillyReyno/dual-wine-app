@@ -1,6 +1,6 @@
 angular.module('dwApp', [
     'ngRoute',
-    'dwLogin', 'dwStart', 'dwApplication',
+    'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestionsService',
     'dwValues'])
     //.config(function($stateProvider, USER_ROLES) {
@@ -52,13 +52,14 @@ angular.module('dwApp', [
                     templateUrl: 'partials/register.html',
                     controller: 'RegisterController'
                 }).
-                when('/question:1', {
-                    templateUrl: 'partials/register.html',
-                    controller: 'RegisterController'
+                when('/question/:id', {
+                    templateUrl: 'partials/question.html',
+                    controller: 'QuestionController'
                 }).
                 otherwise({
                     redirectTo: '/'
                 });
         }]);
 
-angular.module("dwLogin", []);
+angular.module("dwAuth", []);
+angular.module("dwGame", []);

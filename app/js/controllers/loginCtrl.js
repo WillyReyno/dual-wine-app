@@ -1,6 +1,6 @@
-angular.module('dwLogin')
-    .controller('LoginController', function($scope, $http, QuestionFactory, $rootScope, AUTH_EVENTS, AuthService) {
-        $scope.dataquestions = QuestionFactory.query();
+angular.module('dwAuth')
+    .controller('LoginController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
+
 
         /* SESSIONS */
         $scope.credentials = {

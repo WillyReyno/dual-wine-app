@@ -1,4 +1,4 @@
-angular.module('dwLogin')
+angular.module('dwAuth')
     .factory('AuthService', function ($http, Session, apiLogin, apiRegister, $location) {
         // TODO COMMENT Faudra bien regarder son tuto pour voir ce qu'on fait de ce Session, quand on le détruit, etc (et je pense qu'on reste pas co du coup
         //TODO c'est dommage _! Je te laisse revérifier ça

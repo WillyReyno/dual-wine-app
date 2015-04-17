@@ -1,4 +1,4 @@
-angular.module('dwLogin')
+angular.module('dwAuth')
     .controller('RegisterController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
 
         $scope.credentials = {

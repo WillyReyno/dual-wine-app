@@ -1,4 +1,4 @@
-angular.module('dwLogin')
+angular.module('dwAuth')
     .factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
         return {
             responseError: function(response) {

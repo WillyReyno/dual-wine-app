@@ -1,4 +1,4 @@
-angular.module('dwLogin')
+angular.module('dwAuth')
     .directive('loginDialog', function(AUTH_EVENTS) {
         return {
             restrict:'A',
