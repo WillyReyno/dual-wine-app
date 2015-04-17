@@ -1,5 +1,7 @@
 angular.module('dwValues', [])
-    .value('apiLogin', 'http://localhost/dual-wine/public/api/auth/login')
+    .value('apiLogin', 'http://localhost/dual-wine/public/api/auth/login') //post
+    .value('apiRegister', 'http://localhost/dual-wine/public/api/user') //post
+    .value('apiUserUpdate', 'http://localhost/dual-wine/public/api/user') //put
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',

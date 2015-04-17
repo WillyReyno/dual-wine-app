@@ -1,6 +1,6 @@
 angular.module('dwApp', [
     'ngRoute',
-    'dwLogin', 'dwStart', 'dwRegister', 'dwApplication',
+    'dwLogin', 'dwStart', 'dwApplication',
     'dwQuestionsService',
     'dwValues'])
     //.config(function($stateProvider, USER_ROLES) {
