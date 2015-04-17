@@ -1,6 +1,5 @@
 angular.module('dwLogin')
     .controller('RegisterController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
-        //$scope.dataquestions = QuestionFactory.query();
 
         $scope.credentials = {
             username: '',
@@ -9,16 +8,16 @@ angular.module('dwLogin')
         };
 
         $scope.submitRegisterForm = function (credentials) {
-            console.log('submit !');
-            AuthService.register(credentials).then(function (res) {
-                console.log('yes');
-                var test = res.config.data;
-                console.log(test);
-                //var index = test.indexOf('username');
-                delete test.username;
-                console.log(test);
 
-                AuthService.login(test).then(function (res) {
+            /* Inscription de l'user */
+
+            AuthService.register(credentials).then(function (res) {
+                var usercred = res.config.data;
+                delete usercred.username;
+
+                /* Connexion de l'user */
+
+                AuthService.login(usercred).then(function (res) {
                     if(res.data.login) {
                         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                         $scope.setCurrentUser(res.data.user);
@@ -26,18 +25,14 @@ angular.module('dwLogin')
                     } else {
                         $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
                     }
+
                 }, function () {
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
 
-
-
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    $scope.setCurrentUser(res.data);
-
             }, function () {
-                //$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-                console.log('nope');
+
+                // Todo Registration failed
             });
         };
     });
