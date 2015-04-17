@@ -31,7 +31,6 @@ angular.module('dwLogin')
                 });
 
             }, function () {
-
                 // Todo Registration failed
             });
         };
