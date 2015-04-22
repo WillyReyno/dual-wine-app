@@ -1,15 +1,15 @@
 <div ng-controller="QuestionController" class="col-md-12">
     <h2>Question</h2>
 
-    <li ng-repeat="dataquestion in dataquestions">{{dataquestion.question}}</li>
+    <div ng-repeat="dataquestion in dataquestions">
+        <div class="col-md-12">
+            <h2>{{dataquestion.question}}</h2>
+        </div>
 
-   <div class="col-md-12">
-       Quel est machin machin de truc muche ?
-   </div>
-
-    <button class="col-md-6">Rep 1</button>
-    <button class="col-md-6">Rep 2</button>
-    <button class="col-md-6">Rep 3</button>
-    <button class="col-md-6">Rep 4</button>
-
+        <!-- TODO randomize les réponses -->
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_1}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_2}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_3}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_4}}</button>
+    </div>
 </div>

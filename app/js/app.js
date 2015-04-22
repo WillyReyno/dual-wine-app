@@ -41,6 +41,10 @@ angular.module('dwApp', [
         function($routeProvider) {
             $routeProvider.
                 when('/', {
+                    templateUrl: 'partials/login.html',
+                    controller: 'LoginController'
+                }).
+                when('/start', {
                     templateUrl: 'partials/start.html',
                     controller: 'StartController'
                 }).

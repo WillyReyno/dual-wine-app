@@ -1,13 +1,15 @@
 angular.module('dwGame')
-    .controller('StartController', function ($scope, QuestionFactory) {
+    .controller('StartController', function ($scope, QuestionFactory, $location) {
 
-        $scope.dataquestions = QuestionFactory.query();
+
+
+
 
         $scope.startGame = function () {
+            $location.path('/question/1');
+            $scope.dataquestions = QuestionFactory.query();
 
-
-            // Todo Call Question Factory and retrieve the 4 parameters
-
+            console.log($scope.dataquestions);
 
             console.log('start !');
 
