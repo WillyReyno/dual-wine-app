@@ -1,4 +1,17 @@
-angular.module('dw.StartCtrl', [])
-    .controller('StartController', ['$scope', function ($scope) {
-        $scope.hello = "Hello World!";
-    }]);
+angular.module('dwGame')
+    .controller('StartController', function ($scope, QuestionFactory, $location) {
+
+
+
+
+
+        $scope.startGame = function () {
+            $location.path('/question/1');
+            $scope.dataquestions = QuestionFactory.query();
+
+            console.log($scope.dataquestions);
+
+            console.log('start !');
+
+        };
+    });

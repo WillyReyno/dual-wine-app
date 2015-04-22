@@ -1,4 +1,4 @@
-angular.module('dw.formAutofillFix', [])
+angular.module('dwAuth')
     .directive('formAutofillFix', function ($timeout) {
         return function (scope, element, attrs) {
             element.prop('method', 'post');

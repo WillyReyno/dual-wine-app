@@ -1,5 +1,5 @@
-angular.module('dw.AppCtrl', ['dw.AuthService'])
-    .controller('ApplicationController', function($scope, Session) {
+angular.module('dwApplication', [])
+    .controller('ApplicationController', function($scope, $location) {
         $scope.currentUser = null;
 
         $scope.setCurrentUser = function(user) {
@@ -7,7 +7,7 @@ angular.module('dw.AppCtrl', ['dw.AuthService'])
         };
 
         $scope.logout = function () {
-            // TODO not working
-            Session.destroy();
+            $scope.setCurrentUser(null);
+            $location.path('/login');
         };
     });

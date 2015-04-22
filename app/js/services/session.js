@@ -1,12 +1,11 @@
-angular.module('dw.SessionService', [])
+angular.module('dwAuth')
     .service('Session', function() {
         this.create = function(userId) {
-            //this.id = sessionId;
-            this.userId = userId;
+           this.userId = userId;
         };
 
-        this.destroy = function(){
-            this.userId = null;
+        this.destroy = function() {
+
         };
     });
 

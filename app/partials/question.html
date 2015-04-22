@@ -1,0 +1,15 @@
+<div ng-controller="QuestionController" class="col-md-12">
+    <h2>Question</h2>
+
+    <div ng-repeat="dataquestion in dataquestions">
+        <div class="col-md-12">
+            <h2>{{dataquestion.question}}</h2>
+        </div>
+
+        <!-- TODO randomize les réponses -->
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_1}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_2}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_3}}</button>
+        <button class="col-md-6 btn btn-default">{{dataquestion.answer_4}}</button>
+    </div>
+</div>
