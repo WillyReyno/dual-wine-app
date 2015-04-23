@@ -32,7 +32,7 @@ angular.module('dwAuth')
                     console.log('error');
                     console.log(data);
                 })
-        }
+        };
 
         authService.isAuthenticated = function () {
             return !!Session.userId;

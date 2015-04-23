@@ -1,7 +1,7 @@
 angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
-    'dwQuestionsService',
+    'dwQuestion',
     'dwValues'])
     //.config(function($stateProvider, USER_ROLES) {
     //    $stateProvider.state('dashboard', {
@@ -58,7 +58,7 @@ angular.module('dwApp', [
                 }).
                 when('/question/:id', {
                     templateUrl: 'partials/question.html',
-                    controller: 'QuestionController'
+                    controller: 'StartController'
                 }).
                 otherwise({
                     redirectTo: '/'
@@ -67,3 +67,4 @@ angular.module('dwApp', [
 
 angular.module("dwAuth", []);
 angular.module("dwGame", []);
+angular.module("dwQuestion", []);

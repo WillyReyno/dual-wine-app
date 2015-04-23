@@ -1,10 +1,29 @@
-angular.module('dwQuestionsService', ['ngResource'])
-    .factory('QuestionFactory', ['$resource', 'apiQuestions',
-        function($resource, apiQuestions){
-            return $resource(apiQuestions, {}, {
-                query: {method:'GET', params:{limit: 4}, isArray:true}
-                // Todo add a random parameter ?
-            });
+angular.module('dwQuestion')
+    .factory('QuestionFactory', ['$http', 'apiQuestions', 'apiSingleQuestion',
+        function($http, apiQuestions, apiSingleQuestion){
+            var questionFactory = {};
+
+            questionFactory.getQuestions = function() {
+                return $http.get(apiQuestions)
+                    .success(function(data, status, headers, config) {
+                        console.log("success");
+                    })
+                    .error(function(data, status, headers, config){
+                        console.log("error");
+                    })
+            };
+
+            questionFactory.getSingleQuestion = function(id) {
+                return $http.get(apiSingleQuestion+id)
+                    .success(function(data, status, headers, config) {
+                        console.log("success");
+                    })
+                    .error(function(data, status, headers, config) {
+                        console.log("error");
+                    })
+            };
+
+            return questionFactory;
         }]);
 
 
