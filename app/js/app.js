@@ -3,23 +3,6 @@ angular.module('dwApp', [
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
     'dwValues'])
-    //.config(function($stateProvider, USER_ROLES) {
-    //    $stateProvider.state('dashboard', {
-    //        url: '/dashboard',
-    //        templateUrl: 'dashboard/index.html',
-    //        data: {
-    //            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-    //        }
-    //    });
-    //    $stateProvider.state('/question:id', {
-    //        url: '/question:id',
-    //        resolve: {
-    //            auth: function resolveAuthentication(AuthResolver) {
-    //                return AuthResolver.resolve();
-    //            }
-    //        }
-    //    })
-    //})
     .run(function($rootScope, AUTH_EVENTS, AuthService) {
         $rootScope.$on('$stateChangeStart', function(event, next) {
 

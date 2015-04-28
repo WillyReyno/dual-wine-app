@@ -6,8 +6,10 @@
 
         <!-- TODO randomize les réponses -->
     <!-- TODO Faire un form qui mène à la prochaine question -->
-        <button class="col-md-6 btn btn-default">{{ currentQuestion.answer_1 }}</button>
-        <button class="col-md-6 btn btn-default">{{ currentQuestion.answer_2 }}</button>
-        <button class="col-md-6 btn btn-default">{{ currentQuestion.answer_3 }}</button>
-        <button class="col-md-6 btn btn-default">{{ currentQuestion.answer_4 }}</button>
+    <!-- TODO appel fonction submit avec param true/false -->
+    <form>
+        <div ng-repeat="answers in currentAnswers">
+            <button type="submit" class="col-md-6 btn btn-default" ng-click="submit(answers.value)">{{ answers.content }}</button>
+        </div>
+    </form>
 </div>
