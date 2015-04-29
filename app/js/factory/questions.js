@@ -6,10 +6,10 @@ angular.module('dwQuestion')
             questionFactory.getQuestions = function() {
                 return $http.get(apiQuestions)
                     .success(function(data, status, headers, config) {
-                        console.log("success");
+                        console.log("success"); // TODO delete all fours
                     })
                     .error(function(data, status, headers, config){
-                        console.log("error");
+                        console.log("error")
                     })
             };
 

@@ -1,5 +1,5 @@
 angular.module('dwApplication', [])
-    .controller('ApplicationController', function($scope, $location) {
+    .controller('ApplicationController', ['$scope', '$location', function($scope, $location) {
         $scope.currentUser = null;
 
         $scope.setCurrentUser = function(user) {
@@ -10,4 +10,4 @@ angular.module('dwApplication', [])
             $scope.setCurrentUser(null);
             $location.path('/login');
         };
-    });
+    }]);

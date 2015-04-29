@@ -1,5 +1,5 @@
 angular.module('dwAuth')
-    .factory('AuthResolver', function($q, $rootScope, $state){
+    .factory('AuthResolver', ['$q', '$rootScope', '$state', function($q, $rootScope, $state){
         return {
             resolve: function() {
                 var deferred = $q.defer();
@@ -17,6 +17,6 @@ angular.module('dwAuth')
                 return deferred.promise;
             }
         }
-    });
+    }]);
 
 

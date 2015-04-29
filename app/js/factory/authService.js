@@ -1,5 +1,5 @@
 angular.module('dwAuth')
-    .factory('AuthService', function ($http, Session, apiLogin, apiRegister, $location) {
+    .factory('AuthService', ['$http', 'Session', 'apiLogin', 'apiRegister', '$location', function ($http, Session, apiLogin, apiRegister, $location) {
         var authService = {};
         this.apiLogin = apiLogin;
 
@@ -37,6 +37,6 @@ angular.module('dwAuth')
         };
 
         return authService;
-    });
+    }]);
 
 

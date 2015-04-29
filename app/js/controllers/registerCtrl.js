@@ -1,5 +1,18 @@
 angular.module('dwAuth')
-    .controller('RegisterController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
+    .controller('RegisterController', ['$scope', '$http', '$rootScope', 'AuthService', 'Flash',
+        function($scope, $http, $rootScope, AuthService, Flash) {
+
+            $scope.failRegister = function() {
+                var message = '<strong>Echec de l\'inscription</strong>, votre identifiant ou votre adresse e-mail est probablement déjà utilisé.';
+                Flash.create('danger', message);
+            };
+
+            $scope.successRegister = function() {
+                var message = 'Inscription réussie !';
+                Flash.create('success', message);
+            };
+            
+
 
         $scope.credentials = {
             username: '',
@@ -19,20 +32,20 @@ angular.module('dwAuth')
 
                 AuthService.login(usercred).then(function (res) {
                     if(res.data.login) {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                        $scope.successRegister();
                         $scope.setCurrentUser(res.data.user);
 
                     } else {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
+                        $scope.failRegister(); // register failed
                     }
 
                 }, function () {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    $scope.failRegister(); // cant access API login
                 });
 
             }, function () {
-                // Todo Registration failed
+                $scope.failRegister(); // Cant access API register
             });
         };
-    });
+    }]);
 

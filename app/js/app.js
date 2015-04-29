@@ -2,13 +2,13 @@ angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
-    'dwValues'])
+    'dwValues', 'flash'])
     .run(function($rootScope, AUTH_EVENTS, AuthService) {
         $rootScope.$on('$stateChangeStart', function(event, next) {
 
             if(!AuthService.isAuthenticated()) {
                 event.preventDefault();
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // TODO Fail login - et voir si ça sert à qqchose.
             }
         });
     })

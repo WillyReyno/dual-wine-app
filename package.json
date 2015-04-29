@@ -4,6 +4,7 @@
   "description": "Appli Dual Wine",
   "dependencies": {
     "angular": "1.3.x",
+    "angular-flash-alert": "^1.1.0",
     "angular-resource": "~1.3.0",
     "angular-route": "~1.3.0",
     "bootstrap": "~3.1.1",

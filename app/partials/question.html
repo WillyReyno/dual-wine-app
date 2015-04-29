@@ -4,12 +4,10 @@
             <h2>{{ currentQuestion.question }}</h2>
         </div>
 
-        <!-- TODO randomize les réponses -->
-    <!-- TODO Faire un form qui mène à la prochaine question -->
-    <!-- TODO appel fonction submit avec param true/false -->
+        <!-- TODO randomize les réponses / http://jsfiddle.net/adambender/b8sxa/ -->
     <form>
-        <div ng-repeat="answers in currentAnswers">
-            <button type="submit" class="col-md-6 btn btn-default" ng-click="submit(answers.value)">{{ answers.content }}</button>
+        <div ng-repeat="answer in currentAnswers">
+            <button type="submit" class="col-md-6 btn btn-default" ng-click="submit(answer.value)">{{ answer.content }}</button>
         </div>
     </form>
 </div>

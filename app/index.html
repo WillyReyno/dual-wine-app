@@ -23,8 +23,14 @@
             <button ng-click="logout()" class="btn btn-sm btn-primary">Déconnexion</button>
             <div ng-if="currentUser">Bienvenue, {{currentUser.username }}</div>
         </span>
+    </div>
 
+    <div class="row">
         <div ng-view></div>
+    </div>
+    <br> <!-- TODO rajouer du padding en css -->
+    <div class="row">
+        <div flash-message="5000"></div>
     </div>
 </div>
 
