@@ -1,6 +1,5 @@
 angular.module('dwGame')
     .controller('StartController', ['$scope', '$rootScope', 'QuestionFactory', '$location', 'Flash', function ($scope, $rootScope, QuestionFactory, $location, Flash) {
-        $rootScope.results = [];
 
         $scope.next = function (questions, step) {
             $rootScope.questions = questions; // Contient quatre objects, un par question.
@@ -43,6 +42,10 @@ angular.module('dwGame')
 
         $scope.submit = function (result) {
             var id = null;
+            if ($rootScope.step == 0) {
+                $rootScope.results = [];
+            }
+
 
             // TODO Debug cet array qui ne push pas
 
