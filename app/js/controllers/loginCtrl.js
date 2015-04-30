@@ -1,22 +1,6 @@
 angular.module('dwAuth')
-    .controller('LoginController', ['$scope', '$http', '$rootScope', 'AuthService', 'Flash', function($scope, $http, $rootScope, AuthService, Flash) {
+    .controller('LoginController', ['$scope', '$http', '$rootScope', 'AuthService', 'FlashService', function($scope, $http, $rootScope, AuthService, FlashService) {
 
-        $scope.failLogin = function() {
-            var message = '<strong>Connexion échouée</strong>, votre identifiant ou votre mot de pass est erroné.';
-            Flash.create('danger', message);
-        };
-
-        $scope.invalidFields = function() {
-            var message = 'Cette adresse e-mail est invalide.';
-            Flash.create('danger', message);
-        };
-
-        $scope.successLogin = function() {
-            var message = 'Vous êtes bien connecté !';
-            Flash.create('success', message);
-        };
-
-        /* SESSIONS */
         $scope.credentials = {
             email: '',
             password: ''
@@ -25,14 +9,14 @@ angular.module('dwAuth')
         $scope.submitLoginForm = function (credentials) {
             AuthService.login(credentials).then(function (res) {
                 if(res.data.login) {
-                    $scope.successLogin();
+                    FlashService.flashSuccessLogin();
                     $scope.setCurrentUser(res.data.user);
 
                 } else {
-                   $scope.failLogin();
+                    FlashService.flashFailLogin();
                 }
             }, function () {
-               $scope.invalidFields();
+                FlashService.flashInvalidFields();
             });
         };
     }]);

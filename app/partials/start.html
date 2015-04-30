@@ -2,10 +2,10 @@
     <!-- TODO
         Maj : dynamic
     -->
-    <h3>Pseudo</h3>
-    <strong>Nombre de parties gagnées : {{currentUser.won_game }}</strong><br>
-    <strong>Nombre de parties perdues : {{currentUser.lost_game }}</strong><br>
+    <h3>{{currentUser.username}}</h3>
+    <strong>Nombre de parties gagnées : {{currentUser.won_game}}</strong><br>
+    <strong>Nombre de parties perdues : {{currentUser.lost_game}}</strong><br>
     <strong>Pending : </strong><br>
 
-    <button ng-click="startGame()" class="btn btn-default">Commencer</button>
+    <button ng-click="startGame()" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Commencer</button>
 </div>

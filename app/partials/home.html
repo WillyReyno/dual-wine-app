@@ -1,0 +1,14 @@
+<div class="row">
+    <a ng-if="currentUser" href="#/start" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Start</a>
+
+        <span ng-if="!currentUser">
+            <a href="#/login" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Connexion</a>
+            <a href="#/register" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Inscription</a>
+        </span>
+
+
+        <!--<span ng-if="currentUser">-->
+            <!--<button ng-click="logout()" class="col-xs-12 btn btn-sm btn-primary">Déconnexion</button>-->
+            <!--<div ng-if="currentUser">Bienvenue, {{currentUser.username }}</div>-->
+        <!--</span>-->
+</div>

@@ -13,7 +13,7 @@ angular.module('dwAuth')
                         // Todo réussir à retourner une variable pour le ng-hide
                     }
                 })
-                .error(function(data, status, headers, config){
+                .error(function(data, status, headers, config) {
                     console.log("erreur");
                     //TODO en cas d'erreur => afficher une div ng-hide avec "erreur lors de l'envoi de vos identifiants"
                 })

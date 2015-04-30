@@ -1,16 +1,21 @@
 angular.module('dwGame')
-    .controller('StartController', ['$scope', '$rootScope', 'QuestionFactory', '$location', 'Flash', function ($scope, $rootScope, QuestionFactory, $location, Flash) {
+    .controller('StartController', ['$scope', '$rootScope', 'QuestionService', '$location', 'FlashService',
+        function ($scope, $rootScope, QuestionService, $location, FlashService) {
 
+        /* Get the next question's id */
         $scope.next = function (questions, step) {
-            $rootScope.questions = questions; // Contient quatre objects, un par question.
+            $rootScope.questions = questions; // Contient quatre objets, un par question.
             $rootScope.step = step;  // On stock l'étape actuelle
             return currentId = $rootScope.questions[$rootScope.step].id;
         };
 
+        /* Sets the current question and its answers */
+
         $scope.setQuestion = function(id) {
-            QuestionFactory.getSingleQuestion(id).then(function (res) {
+            QuestionService.getSingleQuestion(id).then(function (res) {
                 var questionJson = {};
 
+                /* Formating the object with true and false answers */
                 questionJson.question = res.data.question;
                 questionJson.answer = {};
                 for (var i = 1; i <= 4; i++) {
@@ -25,29 +30,31 @@ angular.module('dwGame')
             });
         };
 
+        /* Start game and redirect to the first question */
         $scope.startGame = function () {
-            Flash.dismiss(); // On masque tous les messages Flash
 
-            QuestionFactory.getQuestions().then(function (res) {
+            Flash.dismiss(); // Hiding all flash message from a view to another
 
-                var currentId = $scope.next(res.data, 0);
+            /* Get the 4 questions given by the API */
+            QuestionService.getQuestions().then(function (res) {
 
-                $location.path('/question/' + currentId);
+                var nextId = $scope.next(res.data, 0); // Retrieve the next question's ID
 
-                $scope.setQuestion(currentId);
+                $location.path('/question/' + nextId); // Go to the next question
+                // TODO check si on peut inverser ces deux lignes ?
+                $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
+
             }, function () {
-                // fail
+                FlashService.flashError();
             });
         };
 
         $scope.submit = function (result) {
             var id = null;
+
             if ($rootScope.step == 0) {
                 $rootScope.results = [];
             }
-
-
-            // TODO Debug cet array qui ne push pas
 
             if ($rootScope.step <= 3) {
                 $rootScope.results.push(result);
@@ -63,52 +70,10 @@ angular.module('dwGame')
                 console.log("finish");
             }
 
-            /*switch ($rootScope.step) {
-                case 0:
-                    $rootScope.results.push(result);
-                    console.log($rootScope.results);
-                    $rootScope.step++;
-                    id = $scope.next($rootScope.questions, $rootScope.step);
-                    $scope.setQuestion(id);
-                    $location.path('/question/' + id);
-                    break;
-                case 1:
-                    $rootScope.results.push(result);
-                    console.log($rootScope.results);
-                    $rootScope.step++;
-                    id = $scope.next($rootScope.questions, $rootScope.step);
-                    $scope.setQuestion(id);
-                    $location.path('/question/' + id);
-                    break;
-                case 2:
-                    $rootScope.results.push(result);
-                    console.log($rootScope.results);
-                    $rootScope.step++;
-                    id = $scope.next($rootScope.questions, $rootScope.step);
-                    $scope.setQuestion(id);
-                    $location.path('/question/' + id);
-                    break;
-                case 3:
-                    $rootScope.results.push(result);
-                    console.log($rootScope.results);
-                    console.log('fini !');
-            }*/
-
-
-            // TODO comment rediriger vers la next route ? Sachant que le next est
-
-            //if ($rootScope.results.length == 4) {
-
-                // On envoie le rï¿½sultat ï¿½ l'API
-
-                // if pending => redirect home
-
-                // if winner => redirect home + message flash "tu as gagnï¿½"
-
-                // if loser => redirect home + message flash "tu as perdu"
-            //}
-            //console.log($rootScope.results.length);
-
+            // TODO Use the flash messages at the right moment.
+            FlashService.flashWinner();
+            FlashService.flashLoser();
+            FlashService.flashPending();
         };
 
 

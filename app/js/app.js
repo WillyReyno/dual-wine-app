@@ -8,7 +8,7 @@ angular.module('dwApp', [
 
             if(!AuthService.isAuthenticated()) {
                 event.preventDefault();
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // TODO Fail login - et voir si ça sert à qqchose.
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // TODO Fail login - et voir si Ã§a sert Ã  qqchose.
             }
         });
     })
@@ -24,7 +24,7 @@ angular.module('dwApp', [
         function($routeProvider) {
             $routeProvider.
                 when('/', {
-                    templateUrl: 'partials/login.html',
+                    templateUrl: 'partials/home.html',
                     controller: 'LoginController'
                 }).
                 when('/start', {
@@ -48,6 +48,7 @@ angular.module('dwApp', [
                 });
         }]);
 
+angular.module("dwApplication", []);
 angular.module("dwAuth", []);
 angular.module("dwGame", []);
 angular.module("dwQuestion", []);

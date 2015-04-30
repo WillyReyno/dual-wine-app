@@ -1,4 +1,4 @@
-angular.module('dwApplication', [])
+angular.module('dwApplication')
     .controller('ApplicationController', ['$scope', '$location', function($scope, $location) {
         $scope.currentUser = null;
 

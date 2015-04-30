@@ -1,19 +1,19 @@
 angular.module('dwQuestion')
-    .factory('QuestionFactory', ['$http', 'apiQuestions', 'apiSingleQuestion',
+    .factory('QuestionService', ['$http', 'apiQuestions', 'apiSingleQuestion',
         function($http, apiQuestions, apiSingleQuestion){
-            var questionFactory = {};
+            var questionService = {};
 
-            questionFactory.getQuestions = function() {
+            questionService.getQuestions = function() {
                 return $http.get(apiQuestions)
                     .success(function(data, status, headers, config) {
-                        console.log("success"); // TODO delete all fours
+                        console.log("success"); // TODO delete console.logs
                     })
                     .error(function(data, status, headers, config){
-                        console.log("error")
+                        console.log("error");
                     })
             };
 
-            questionFactory.getSingleQuestion = function(id) {
+            questionService.getSingleQuestion = function(id) {
                 return $http.get(apiSingleQuestion+id)
                     .success(function(data, status, headers, config) {
                         console.log("success");
@@ -23,7 +23,7 @@ angular.module('dwQuestion')
                     })
             };
 
-            return questionFactory;
+            return questionService;
         }]);
 
 

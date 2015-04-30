@@ -1,51 +1,41 @@
 angular.module('dwAuth')
-    .controller('RegisterController', ['$scope', '$http', '$rootScope', 'AuthService', 'Flash',
-        function($scope, $http, $rootScope, AuthService, Flash) {
+    .controller('RegisterController', ['$scope', '$http', '$rootScope', 'AuthService', 'FlashService',
+        function($scope, $http, $rootScope, AuthService, FlashService) {
 
-            $scope.failRegister = function() {
-                var message = '<strong>Echec de l\'inscription</strong>, votre identifiant ou votre adresse e-mail est probablement déjà utilisé.';
-                Flash.create('danger', message);
+            /* Credentials */
+
+            $scope.credentials = {
+                username: '',
+                email: '',
+                password: ''
             };
 
-            $scope.successRegister = function() {
-                var message = 'Inscription réussie !';
-                Flash.create('success', message);
-            };
-            
+            $scope.submitRegisterForm = function (credentials) {
 
+                /* User registration */
 
-        $scope.credentials = {
-            username: '',
-            email: '',
-            password: ''
-        };
+                AuthService.register(credentials).then(function (res) {
+                    var usercred = res.config.data;
+                    delete usercred.username;
 
-        $scope.submitRegisterForm = function (credentials) {
+                    /* User login */
 
-            /* Inscription de l'user */
+                    AuthService.login(usercred).then(function (res) {
+                        if(res.data.login) {
+                            FlashService.flashSuccessRegister();
+                            $scope.setCurrentUser(res.data.user);
 
-            AuthService.register(credentials).then(function (res) {
-                var usercred = res.config.data;
-                delete usercred.username;
+                        } else {
+                            FlashService.flashFailRegister(); // register failed
+                        }
 
-                /* Connexion de l'user */
-
-                AuthService.login(usercred).then(function (res) {
-                    if(res.data.login) {
-                        $scope.successRegister();
-                        $scope.setCurrentUser(res.data.user);
-
-                    } else {
-                        $scope.failRegister(); // register failed
-                    }
+                    }, function () {
+                        FlashService.flashFailRegister(); // cant access API login
+                    });
 
                 }, function () {
-                    $scope.failRegister(); // cant access API login
+                    FlashService.flashFailRegister(); // Cant access API register
                 });
-
-            }, function () {
-                $scope.failRegister(); // Cant access API register
-            });
-        };
-    }]);
+            };
+        }]);
 
