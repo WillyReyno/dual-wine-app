@@ -33,10 +33,19 @@ angular.module('dwGame')
         /* Start game and redirect to the first question */
         $scope.startGame = function () {
 
-            Flash.dismiss(); // Hiding all flash message from a view to another
+            FlashService.dismiss(); // Hiding all flash message from a view to another
 
+            //TODO (if pending game) Récupérer l'user 1 depuis l'API
+            // TODO (if pending game) Récupérer les 4 questions à poser
+            // TODO else => getQuestions()...
+
+
+            // TODO (if new game) ->
             /* Get the 4 questions given by the API */
             QuestionService.getQuestions().then(function (res) {
+
+                // TODO (if new game) Générer l'user 2
+                // TODO (if new game) Stocker dans la table partie : user1_id, user2_id, res.data, (user1_answers), (user2_answers), (winner_user_id), (looser_user_id)
 
                 var nextId = $scope.next(res.data, 0); // Retrieve the next question's ID
 
@@ -61,19 +70,31 @@ angular.module('dwGame')
 
                 console.log($rootScope.results);
 
+
                 $rootScope.step++;
-                id = $scope.next($rootScope.questions, $rootScope.step);
-                $scope.setQuestion(id);
-                $location.path('/question/' + id);
+
+                if($rootScope.step < 4) {
+                    id = $scope.next($rootScope.questions, $rootScope.step);
+                    $scope.setQuestion(id);
+                    $location.path('/question/' + id);
+                }
+
             }
-            if ($rootScope.step == 3) {
+            // If results == 4, end of the game
+            if ($rootScope.results.length == 4) {
+                // TODO (if new game) Send results to the API : user1_id, (user2_id), res.data, user1_answers, (user2_answers), (winner_user_id), (looser_user_id)
+                // TODO location.path + FlashService.flashPending();
+
+                // TODO elseif (pending game) => Send results to the API : (user1_id), user2_id, (res.data), (user1_answers), user2_answers, winner_user_id, looser_user_id
+                // TODO location.path + if(user2_id == winner_user_id) FlashService.flashWinner(); else FlashService.flashLoser();
+
                 console.log("finish");
             }
 
             // TODO Use the flash messages at the right moment.
-            FlashService.flashWinner();
-            FlashService.flashLoser();
-            FlashService.flashPending();
+            //FlashService.flashWinner();
+            //FlashService.flashLoser();
+            //FlashService.flashPending();
         };
 
 

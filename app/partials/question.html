@@ -1,13 +1,11 @@
 <div ng-controller="StartController" class="col-md-12">
 
-        <div class="col-md-12">
-            <h2>{{ currentQuestion.question }}</h2>
-        </div>
+    <div class="col-md-12">
+        <h2>{{ currentQuestion.question }}</h2>
+    </div>
 
-        <!-- TODO randomize les r�ponses / http://jsfiddle.net/adambender/b8sxa/ -->
+    <!-- TODO randomize les réponses / http://jsfiddle.net/adambender/b8sxa/ -->
     <form>
-        <div ng-repeat="answer in currentAnswers">
-            <button type="submit" class="col-md-6 btn btn-default btn-raised" ng-click="submit(answer.value)">{{ answer.content }}</button>
-        </div>
+        <button ng-repeat="answer in currentAnswers" type="submit" class="col-md-5 btn btn-primary btn-raised" ng-click="submit(answer.value)">{{ answer.content }}</button>
     </form>
 </div>

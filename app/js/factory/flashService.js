@@ -3,6 +3,18 @@ angular.module('dwApplication')
 
         var flashService = {};
 
+        /* Dismiss (hide all flash message) */
+
+        flashService.dismiss = function() {
+            Flash.dismiss();
+        };
+
+        /* Pause (will pause the flash message and will not dismiss) */
+
+        flashService.pause = function() {
+            Flash.pause();
+        };
+
         /* Login */
 
         flashService.flashFailLogin = function() {
