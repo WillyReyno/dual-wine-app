@@ -6,20 +6,20 @@ angular.module('dwQuestion')
             questionService.getQuestions = function() {
                 return $http.get(apiQuestions)
                     .success(function(data, status, headers, config) {
-                        console.log("success"); // TODO delete console.logs
+                        // TODO Do something on success ?
                     })
                     .error(function(data, status, headers, config){
-                        console.log("error");
+                        // TODO Do something on error
                     })
             };
 
             questionService.getSingleQuestion = function(id) {
                 return $http.get(apiSingleQuestion+id)
                     .success(function(data, status, headers, config) {
-                        console.log("success");
+                        // TODO Do something on success ?
                     })
                     .error(function(data, status, headers, config) {
-                        console.log("error");
+                        // TODO Do something on error
                     })
             };
 
