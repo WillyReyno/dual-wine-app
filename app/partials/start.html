@@ -7,5 +7,11 @@
     <strong>Nombre de parties perdues : {{currentUser.lost_game}}</strong><br>
     <strong>Pending : </strong><br>
 
+
+
+    <button ng-click="randomUser(currentUser.id)" class="col-xs-3 btn btn-lg btn-primary">Random User</button>
+    <button ng-click="waitingForYou(currentUser.id)" class="col-xs-3 btn btn-lg btn-primary">Waiting for you</button>
+    <button ng-click="waitingForOther(currentUser.id)" class="col-xs-3 btn btn-lg btn-primary">Waiting for other user</button>
+
     <button ng-click="startGame()" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Commencer</button>
 </div>
