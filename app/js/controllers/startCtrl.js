@@ -3,26 +3,22 @@ angular.module('dwGame')
         function ($scope, $rootScope, QuestionService, $location, FlashService) {
 
             /* Get the next question's id */
+
             $scope.next = function (questions, step) {
                 $rootScope.questions = questions; // Contient quatre objets, un par question.
                 $rootScope.step = step;  // On stock l'étape actuelle
                 return currentId = $rootScope.questions[$rootScope.step].id;
             };
 
-            $scope.randomUser = function(user_id) {
-                QuestionService.getRandomOtherUser(user_id).then(function(res) {
-                    console.log(res.data);
 
-                });
-            };
-
+            // TODO Tester quand on aura la route d'update de parties puis supprimer
             $scope.waitingForYou = function(user_id) {
                 QuestionService.getUserGameNotPlayed(user_id).then(function(res) {
                     console.log(res.data);
-
                 });
             };
 
+            // TODO Tester quand on aura la route d'update de parties puis supprimer
             $scope.waitingForOther = function(user_id) {
                 QuestionService.getUserGameWaiting(user_id).then(function(res) {
                     console.log(res.data)
@@ -35,19 +31,40 @@ angular.module('dwGame')
                 QuestionService.getSingleQuestion(id).then(function (res) {
                     var questionJson = {};
 
+                    function shuffle(array) {
+                        var currentIndex = array.length, temporaryValue, randomIndex ;
 
+                        // While there remain elements to shuffle...
+                        while (0 !== currentIndex) {
+
+                            // Pick a remaining element...
+                            randomIndex = Math.floor(Math.random() * currentIndex);
+                            currentIndex -= 1;
+
+                            // And swap it with the current element.
+                            temporaryValue = array[currentIndex];
+                            array[currentIndex] = array[randomIndex];
+                            array[randomIndex] = temporaryValue;
+                        }
+
+                        return array;
+                    }
 
                     /* Formating the object with true and false answers */
                     questionJson.question = res.data.question;
-                    questionJson.answer = {};
+                    var tests = [];
                     for (var i = 1; i <= 4; i++) {
-                        questionJson.answer['answer' + i] = {};
-                        questionJson.answer['answer' + i].content = res.data['answer_' + i];
-                        questionJson.answer['answer' + i].value = i == 1;
+                        tests.push({
+                            "content":res.data['answer_' + i],
+                            "value": i == 1
+                        });
+                        //test['answer' + i] = {};
+                        //test['answer' + i].content = res.data['answer_' + i];
+                        //test['answer' + i].value = i == 1;
                     }
-
+                    shuffle(tests);
                     $rootScope.currentQuestion = questionJson;
-                    $rootScope.currentAnswers = questionJson.answer;
+                    $rootScope.currentAnswers = tests;
 
                 });
             };
@@ -76,8 +93,6 @@ angular.module('dwGame')
                         $rootScope.user2 = res.data;
                         console.log(res.data);
                     });
-                    // TODO (if new game) Générer l'user 2
-                    // TODO (if new game) Stocker dans la table partie : user1_id, user2_id, res.data, (user1_answers), (user2_answers), (winner_user_id), (looser_user_id)
 
                     var nextId = $scope.next(res.data, 0); // Retrieve the next question's ID
 
@@ -114,10 +129,9 @@ angular.module('dwGame')
                 }
                 // If results == 4, end of the game
                 if ($rootScope.results.length == 4) {
-                    console.log($rootScope.newGame);
 
                     if($rootScope.newGame) {
-                        var array = [
+                        var finalGame = [
                             $scope.currentUser.id,
                             $rootScope.user2,
                             [
@@ -127,22 +141,41 @@ angular.module('dwGame')
                                 $rootScope.questions[3].id
                             ],
                             $rootScope.results,
-                            '', // answers user 2
-                            '', // winner user id
-                            '' // loser user id
+                            '', // Réponses de l'user 2, plus tard
+                            '', // ID du winner à déterminer dans la seconde partie
+                            '' // ID du loser à déterminer dans la seconde partie
                         ];
-                        console.log(array);
-                        QuestionService.sendResults(array)
+                        console.log(finalGame);
+                        QuestionService.sendResults(finalGame);
+
+                        $location.path('/start');
+                        FlashService.flashPending();
+
                     } else {
+                        var finalPending = [
+                            '', // user 1 déjà dans la BDD
+                            '', // user 2 déjà dans la BDD
+                            '', // Questions déjà dans la BDD
+                            '', // Réponses user1 déjà dans la BDD
+                            $rootScope.results, // answers user 2
+                            '', // TODO déterminer winner user id
+                            '' // TODO déterminer loser user id
+                        ];
 
+                        //TODO Incrémenter le win et lose game des users !
+
+                        console.log(finalPending);
+
+                        QuestionService.sendResults(finalPending);
+                        $location.path('/start');
+
+                        var winner = true; // TODO Déterminer s'il est gagnant ou pas selon les résultats
+                        if(winner) {
+                            FlashService.flashWinner();
+                        } else {
+                            FlashService.flashLoser();
+                        }
                     }
-
-
-                    // TODO (if new game) Send results to the API : user1_id, (user2_id), res.data, user1_answers, (user2_answers), (winner_user_id), (looser_user_id)
-                    // TODO location.path + FlashService.flashPending();
-
-                    // TODO elseif (pending game) => Send results to the API : (user1_id), user2_id, (res.data), (user1_answers), user2_answers, winner_user_id, looser_user_id
-                    // TODO location.path + if(user2_id == winner_user_id) FlashService.flashWinner(); else FlashService.flashLoser();
 
                     console.log($rootScope.user2);
                 }

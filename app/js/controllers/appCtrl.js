@@ -1,9 +1,9 @@
 angular.module('dwApplication')
-    .controller('ApplicationController', ['$scope', '$location', function($scope, $location) {
-        $scope.currentUser = null;
+    .controller('ApplicationController', ['$scope', '$location', '$rootScope', function($scope, $location, $rootScope) {
+        $rootScope.currentUser = null;
 
         $scope.setCurrentUser = function(user) {
-            $scope.currentUser = user;
+            $rootScope.currentUser = user;
         };
 
         $scope.logout = function () {
