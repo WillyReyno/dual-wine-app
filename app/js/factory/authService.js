@@ -8,7 +8,7 @@ angular.module('dwAuth')
             return $http.post(apiLogin, credentials)
                 .success(function(data, status, headers, config) {
                     if(data.login == true) {
-                        $location.path('/start');
+                        $location.path('/');
                     } else {
                         // Todo réussir à retourner une variable pour le ng-hide
                     }
@@ -24,7 +24,7 @@ angular.module('dwAuth')
                 .success(function(data, status, headers, config) {
                     console.log('success');
                     console.log(data);
-                    $location.path('/start');
+                    $location.path('/');
                 })
                 .error(function(data, status, headers, config) {
                     console.log('error');

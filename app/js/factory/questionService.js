@@ -1,6 +1,6 @@
 angular.module('dwQuestion')
-    .factory('QuestionService', ['$http', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting', 'apiUserGameNotPlayed', 'apiUserRandomOther',
-        function($http, apiQuestions, apiSingleQuestion, apiUserGameWaiting, apiUserGameNotPlayed, apiUserRandomOther){
+    .factory('QuestionService', ['$http', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting', 'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame',
+        function($http, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting, apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame){
             var questionService = {};
 
             questionService.getQuestions = function() {
@@ -34,7 +34,7 @@ angular.module('dwQuestion')
             };
 
             questionService.getUserGameNotPlayed = function(user_id) {
-                return $http.post(apiUserGameNotPlayed, user_id)
+                return $http.post(apiUserGameNotPlayed, {id: user_id})
                     .success(function(data, status, headers, config) {
                         // TODO Do something on success ?
                     })
@@ -44,7 +44,7 @@ angular.module('dwQuestion')
             };
 
             questionService.getUserGameWaiting = function(user_id) {
-                return $http.post(apiUserGameWaiting, user_id)
+                return $http.post(apiUserGameWaiting, {id: user_id})
                     .success(function(data, status, headers, config) {
                         // TODO Do something on success ?
                     })
@@ -53,12 +53,38 @@ angular.module('dwQuestion')
                     })
             };
 
-            questionService.sendResults = function(array) {
-                return $http.post('inserer value de l\'API', array)
+            questionService.launchGame = function(array) {
+                var launch = {
+                    user1_id: array.user1_id,
+                    user2_id: array.user2_id,
+                    questions: array.questions,
+                    user1_answers: array.user1_answers
+                };
+                return $http.post(apiLaunchGame, launch)
+                    .success(function(data, status, headers, config) {
+
+                    })
+                    .error(function(data, status, headers, config) {
+                        // TODO Do something on error
+                    })
+            };
+
+            questionService.endGame = function(array) {
+                return $http.post(apiEndGame, {user1_id: array.user1_id, user2_id: array.user2_id, questions: array.questions, user1_answers: array.user1_answers})
                     .success(function(data, status, headers, config) {
                         // TODO Do something on success ?
                     })
                     .error(function(data, status, headers, config) {
+                        // TODO Do something on error
+                    })
+            };
+
+            questionService.getUser = function(id) {
+                return $http.get(apiUser+id)
+                    .success(function(data, status, headers, config) {
+                        return data.username;
+                    })
+                    .error(function(data, status, headers, config){
                         // TODO Do something on error
                     })
             };

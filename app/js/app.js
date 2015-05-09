@@ -3,14 +3,6 @@ angular.module('dwApp', [
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
     'dwValues', 'flash'])
-    .run(function($rootScope, AUTH_EVENTS, AuthService) {
-        $rootScope.$on('$stateChangeStart', function(event, next) {
-            if(!AuthService.isAuthenticated()) {
-                event.preventDefault();
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // TODO Fail login - et voir si ça sert à qqchose.
-            }
-        });
-    })
     .config(function($httpProvider){
         $httpProvider.interceptors.push([
             '$injector',
@@ -23,12 +15,7 @@ angular.module('dwApp', [
         function($routeProvider) {
             $routeProvider.
                 when('/', {
-                    templateUrl: 'partials/home.html',
-                    controller: 'LoginController'
-                }).
-                when('/start', {
-                    templateUrl: 'partials/start.html',
-                    controller: 'StartController'
+                    templateUrl: 'partials/home.html'
                 }).
                 when('/login', {
                     templateUrl: 'partials/login.html',
@@ -52,13 +39,20 @@ angular.module('dwApp', [
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
             if ( $rootScope.currentUser == null ) {
                 // no logged user, we should be going to #login
-                if ( next.templateUrl == "partials/login.html" ) {
+                var part = ["partials/login.html", "partials/register.html"];
+                if (part.indexOf(next.templateUrl) !== -1) {
                     // already going to #login, no redirect needed
                 } else {
                     // not going to #login, we should redirect now
-                    $location.path( "/login" );
+                    $location.path( "/" );
                 }
             }
+
+            //if($rootScope.currentUser) {
+            //    if(next.templateUrl == "partials/home.html") {
+            //        $location.path("/")
+            //    }
+            //}
         });
     });
 

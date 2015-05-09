@@ -9,7 +9,7 @@ gulp.task('vendors', function(){
 });
 
 gulp.task('styles', function(){
-   return gulp.src(['app/css/*.css'])
+   return gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'app/css/*.css'])
        .pipe(gp_concat('concat_style.css'))
        .pipe(gulp.dest('vendors'));
 });

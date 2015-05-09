@@ -64,7 +64,7 @@ angular.module('dwApplication')
 
         flashService.flashPending = function() {
             // TODO Mettre le pseudo du joueur
-            var message = 'En attente du second joueur';
+            var message = 'En attente du second joueur.';
             Flash.create('info', message);
         };
 

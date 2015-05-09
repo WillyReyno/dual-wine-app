@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Dual Wine</title>
 
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../vendors/concat_style.css">
 
     <script src="../vendors/concat_modules.js"></script>
@@ -18,6 +17,11 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#/">Dual Wine</a>
         </div>
+        <ul ng-if="currentUser" class="nav navbar-nav navbar-right">
+
+            <li ><a ng-click="logout()" href="#">Déconnexion</a></li>
+        </ul>
+
     </div><!-- /.container-fluid -->
 </nav>
 <div flash-message="5000"></div>
