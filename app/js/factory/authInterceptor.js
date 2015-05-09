@@ -1,5 +1,5 @@
 angular.module('dwAuth')
-    .factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
+    .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function($rootScope, $q, AUTH_EVENTS) {
         return {
             responseError: function(response) {
                 $rootScope.$broadcast({
@@ -11,6 +11,7 @@ angular.module('dwAuth')
                 return $q.reject(response);
             }
         };
-    });
+    }]);
+// TODO check si ça sert à qqchose
 
 

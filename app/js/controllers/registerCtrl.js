@@ -1,38 +1,41 @@
 angular.module('dwAuth')
-    .controller('RegisterController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
+    .controller('RegisterController', ['$scope', '$http', '$rootScope', 'AuthService', 'FlashService',
+        function($scope, $http, $rootScope, AuthService, FlashService) {
 
-        $scope.credentials = {
-            username: '',
-            email: '',
-            password: ''
-        };
+            /* Credentials */
 
-        $scope.submitRegisterForm = function (credentials) {
+            $scope.credentials = {
+                username: '',
+                email: '',
+                password: ''
+            };
 
-            /* Inscription de l'user */
+            $scope.submitRegisterForm = function (credentials) {
 
-            AuthService.register(credentials).then(function (res) {
-                var usercred = res.config.data;
-                delete usercred.username;
+                /* User registration */
 
-                /* Connexion de l'user */
+                AuthService.register(credentials).then(function (res) {
+                    var usercred = res.config.data;
+                    delete usercred.username;
 
-                AuthService.login(usercred).then(function (res) {
-                    if(res.data.login) {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                        $scope.setCurrentUser(res.data.user);
+                    /* User login */
 
-                    } else {
-                        $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
-                    }
+                    AuthService.login(usercred).then(function (res) {
+                        if(res.data.login) {
+                            FlashService.flashSuccessRegister();
+                            $scope.setCurrentUser(res.data.user);
+
+                        } else {
+                            FlashService.flashFailRegister(); // register failed
+                        }
+
+                    }, function () {
+                        FlashService.flashFailRegister(); // cant access API login
+                    });
 
                 }, function () {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    FlashService.flashFailRegister(); // Cant access API register
                 });
-
-            }, function () {
-                // Todo Registration failed
-            });
-        };
-    });
+            };
+        }]);
 

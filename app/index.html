@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <title>Dual Wine</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../vendors/concat_style.css">
 
     <script src="../vendors/concat_modules.js"></script>
     <script src="../vendors/concat_vendor.js"></script>
 
 </head>
 <body ng-controller="ApplicationController">
-<div class="container">
-    <div class="row">
-        <a href="#/start" class="btn btn-sm btn-primary">Start</a>
-        <span ng-if="!currentUser">
-            <a href="#/login" class="btn btn-sm btn-primary">Connexion</a>
-            <a href="#/register" class="btn btn-sm btn-primary">Inscription</a>
-        </span>
-        <span ng-if="currentUser">
-            <button ng-click="logout()" class="btn btn-sm btn-primary">Déconnexion</button>
-            <div ng-if="currentUser">Bienvenue, {{currentUser.username }}</div>
-        </span>
 
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">Dual Wine</a>
+        </div>
+        <ul ng-if="currentUser" class="nav navbar-nav navbar-right">
+
+            <li ><a ng-click="logout()" href="#">Déconnexion</a></li>
+        </ul>
+
+    </div><!-- /.container-fluid -->
+</nav>
+<div flash-message="5000"></div>
+
+
+<div class="container">
+
+    <div class="row">
         <div ng-view></div>
     </div>
-</div>
+    <br> <!-- TODO rajouer du padding en css -->
 
-<!--<div login-dialog ng-if="!isLoginPage">lol</div>-->
+</div>
 </body>
 </html>

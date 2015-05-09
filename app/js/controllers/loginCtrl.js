@@ -1,8 +1,6 @@
 angular.module('dwAuth')
-    .controller('LoginController', function($scope, $http, $rootScope, AUTH_EVENTS, AuthService) {
+    .controller('LoginController', ['$scope', '$http', '$rootScope', 'AuthService', 'FlashService', function($scope, $http, $rootScope, AuthService, FlashService) {
 
-
-        /* SESSIONS */
         $scope.credentials = {
             email: '',
             password: ''
@@ -11,15 +9,15 @@ angular.module('dwAuth')
         $scope.submitLoginForm = function (credentials) {
             AuthService.login(credentials).then(function (res) {
                 if(res.data.login) {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    FlashService.flashSuccessLogin();
                     $scope.setCurrentUser(res.data.user);
 
                 } else {
-                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed)
+                    FlashService.flashFailLogin();
                 }
             }, function () {
-                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                FlashService.flashInvalidFields();
             });
         };
-    });
+    }]);
 

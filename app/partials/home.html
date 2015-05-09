@@ -1,0 +1,36 @@
+<div ng-if="currentUser">
+    <div ng-controller="StartController"  class="col-md-12">
+
+        <div class="col-md-12">
+            <h2>{{currentUser.username}}</h2>
+            <strong>Nombre de parties gagnées :</strong> {{currentUser.won_game}}<br>
+            <strong>Nombre de parties perdues :</strong> {{currentUser.lost_game}}
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <h3>Ils vous attendent ({{players.length}})</h3>
+            <div ng-show="!players">
+                <p>Aucun partie en attente</p>
+            </div>
+
+            <div ng-repeat="player in players">
+                <button ng-click="startPendingGame(player)" class="btn btn-sm btn-primary">Jouer contre {{player.user1_id}}</button>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <h3>En attente d'un autre joueur ({{others.length}})</h3>
+            <div ng-repeat="other in others">
+                Partie contre {{other.user2_id}}
+            </div>
+        </div>
+
+        <button ng-click="startGame()" class="btn btn-lg btn-success">Nouvelle partie</button>
+    </div>
+</div>
+<div ng-if="!currentUser">
+    <div class="col-md-12">
+        <a href="#/login" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Connexion</a>
+        <a href="#/register" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Inscription</a>
+    </div>
+</div>

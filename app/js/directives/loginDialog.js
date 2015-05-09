@@ -9,6 +9,7 @@ angular.module('dwAuth')
                 };
 
                 scope.visible = false;
+                // TODO Error login / voir si ça sert à qqchose.
                 scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
                 scope.$on(AUTH_EVENTS.sessionTimeout, showDialog);
             }

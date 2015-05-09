@@ -1,34 +1,8 @@
 angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
-    'dwQuestionsService',
-    'dwValues'])
-    //.config(function($stateProvider, USER_ROLES) {
-    //    $stateProvider.state('dashboard', {
-    //        url: '/dashboard',
-    //        templateUrl: 'dashboard/index.html',
-    //        data: {
-    //            authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-    //        }
-    //    });
-    //    $stateProvider.state('/question:id', {
-    //        url: '/question:id',
-    //        resolve: {
-    //            auth: function resolveAuthentication(AuthResolver) {
-    //                return AuthResolver.resolve();
-    //            }
-    //        }
-    //    })
-    //})
-    .run(function($rootScope, AUTH_EVENTS, AuthService) {
-        $rootScope.$on('$stateChangeStart', function(event, next) {
-
-            if(!AuthService.isAuthenticated()) {
-                event.preventDefault();
-                $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-            }
-        });
-    })
+    'dwQuestion',
+    'dwValues', 'flash'])
     .config(function($httpProvider){
         $httpProvider.interceptors.push([
             '$injector',
@@ -41,12 +15,7 @@ angular.module('dwApp', [
         function($routeProvider) {
             $routeProvider.
                 when('/', {
-                    templateUrl: 'partials/login.html',
-                    controller: 'LoginController'
-                }).
-                when('/start', {
-                    templateUrl: 'partials/start.html',
-                    controller: 'StartController'
+                    templateUrl: 'partials/home.html'
                 }).
                 when('/login', {
                     templateUrl: 'partials/login.html',
@@ -58,12 +27,36 @@ angular.module('dwApp', [
                 }).
                 when('/question/:id', {
                     templateUrl: 'partials/question.html',
-                    controller: 'QuestionController'
+                    controller: 'StartController'
                 }).
                 otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/login'
                 });
-        }]);
+        }
+    ])
+    .run( function($rootScope, $location) {
+        // register listener to watch route changes
+        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+            if ( $rootScope.currentUser == null ) {
+                // no logged user, we should be going to #login
+                var part = ["partials/login.html", "partials/register.html"];
+                if (part.indexOf(next.templateUrl) !== -1) {
+                    // already going to #login, no redirect needed
+                } else {
+                    // not going to #login, we should redirect now
+                    $location.path( "/" );
+                }
+            }
 
+            //if($rootScope.currentUser) {
+            //    if(next.templateUrl == "partials/home.html") {
+            //        $location.path("/")
+            //    }
+            //}
+        });
+    });
+
+angular.module("dwApplication", []);
 angular.module("dwAuth", []);
 angular.module("dwGame", []);
+angular.module("dwQuestion", []);
