@@ -70,7 +70,11 @@ angular.module('dwQuestion')
             };
 
             questionService.endGame = function(array) {
-                return $http.post(apiEndGame, {user1_id: array.user1_id, user2_id: array.user2_id, questions: array.questions, user1_answers: array.user1_answers})
+                var end = {
+                    id: array.id,
+                    user2_answers: array.user2_answers
+                };
+                return $http.post(apiEndGame, end)
                     .success(function(data, status, headers, config) {
                         // TODO Do something on success ?
                     })
