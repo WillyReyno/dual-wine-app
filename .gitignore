@@ -2,5 +2,6 @@
 /node_modules
 /vendors/concat_style.css
 /vendors/concat_vendor.js
+/vendors/concat_modules.js
 app/css/material.css
 app/css/style.css
