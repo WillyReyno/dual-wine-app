@@ -1,26 +1,31 @@
 <div ng-if="currentUser">
     <div ng-controller="StartController"  class="col-md-12">
 
-        <div class="col-md-12">
+        <div class="col-xs-6">
             <h2>{{currentUser.username}}</h2>
-            <strong>Nombre de parties gagnées :</strong> {{currentUser.won_game}}<br>
-            <strong>Nombre de parties perdues :</strong> {{currentUser.lost_game}}
+            <strong>Parties gagnées :</strong> {{currentUser.won_game}}<br>
+            <strong>Parties perdues :</strong> {{currentUser.lost_game}}
         </div>
+        <div class="col-xs-6 pull-right avatar">
+            <img class="pull-right" gravatar-src="'{{currentUser.email}}'" gravatar-size="100">
+        </div>
+
+
+        <button ng-click="startGame()" class="btn btn-lg btn-success col-xs-12">Nouvelle partie</button>
+        <button ng-click="startTraining()" class="btn btn-lg btn-info col-xs-12">Entraînement</button> <!-- TODO Dev le mode entrainement -->
 
         <div ng-controller="HomeController">
             <div class="col-md-6 col-xs-12">
 
                 <h3>Ils vous attendent ({{players.length}})</h3>
-                <div ng-show="!players">
+                <div ng-if="players.length==0">
                     <p>Aucun partie en attente</p>
                 </div>
 
                 <div ng-repeat="player in players">
-
                     <button ng-click="startPendingGame(player)" class="btn btn-sm btn-primary">Jouer contre {{player.user1.username}}</button>
                 </div>
             </div>
-        </div>
 
         <div class="col-md-6 col-xs-12">
             <h3>En attente d'un autre joueur ({{others.length}})</h3>
@@ -28,8 +33,9 @@
                 Partie contre {{other.user1.username}}
             </div>
         </div>
+        </div>
 
-        <button ng-click="startGame()" class="btn btn-lg btn-success">Nouvelle partie</button>
+
     </div>
 </div>
 <div ng-if="!currentUser">
