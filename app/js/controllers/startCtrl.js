@@ -90,6 +90,7 @@ angular.module('dwGame')
                 $rootScope.game = game;
                 $rootScope.newGame = false;
                 $rootScope.gameId = game.id;
+                $rootScope.gameUser1 = game.user1_id;
                 FlashService.dismiss(); // Hiding all flash message from a view to another
                 var nextId = $scope.next(game.questions, 0); // Retrieve the next question's ID
 
@@ -131,12 +132,13 @@ angular.module('dwGame')
                         launch['user1_answers'] = $rootScope.results;
 
                         QuestionService.launchGame(launch).then(function(res) {
-                            //console.log(res.data);
+
+                            QuestionService.getUser($rootScope.user2.id).then(function(res) {
+                                FlashService.flashPending(res.data.username);
+                            });
+
+                            $location.path('/');
                         });
-
-                        $location.path('/');
-                        FlashService.flashPending(); //TODO rajouter l'username
-
                     } else {
 
                         var end = [];
@@ -145,17 +147,28 @@ angular.module('dwGame')
 
                         QuestionService.endGame(end).then(function(res) {
 
-                            var finish = [];
+                            var finish = {};
                             finish['id'] = $rootScope.gameId;
                             finish['user1_id'] = $rootScope.game.user1_id;
                             finish['user2_id'] = $rootScope.game.user2_id;
                             finish['user1_answers'] = $rootScope.game.user1_answers;
                             finish['user2_answers'] = $rootScope.results;
 
-                            console.log(finish);
-
                             QuestionService.finishGame(finish).then(function(finishRes) {
-                                console.log(finishRes);
+                                console.log(finishRes.data);
+                                if(finishRes.data.exaequo == true) {
+                                    QuestionService.getUser($rootScope.gameUser1).then(function(res) {
+                                        FlashService.flashExaequo(res.data.username);
+                                    });
+                                } else if (finishRes.data.winner == $rootScope.currentUser.id) {
+                                    QuestionService.getUser($rootScope.gameUser1).then(function(res) {
+                                        FlashService.flashWinner(res.data.username);
+                                    });
+                                } else {
+                                    QuestionService.getUser($rootScope.gameUser1).then(function(res) {
+                                        FlashService.flashLoser(res.data.username);
+                                    });
+                                }
 
                                 $location.path('/');
 
@@ -164,6 +177,4 @@ angular.module('dwGame')
                     }
                 }
             };
-
-
         }]);
