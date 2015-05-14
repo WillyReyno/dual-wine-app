@@ -8,8 +8,9 @@ angular.module('dwValues', [])
     .value('apiUserGameNotPlayed', 'http://localhost/dual-wine/public/api/game/getUserGameNotPlayed') // post
     .value('apiUserGameWaiting', 'http://localhost/dual-wine/public/api/game/getUserGameWaiting') // post
     .value('apiUserRandomOther', 'http://localhost/dual-wine/public/api/user/randomOther') // post
-    .value('apiLaunchGame', 'http://localhost/dual-wine/public/api/game/launchGame')
-    .value('apiEndGame', 'http://localhost/dual-wine/public/api/game/endGame')
+    .value('apiLaunchGame', 'http://localhost/dual-wine/public/api/game/launchGame') // post
+    .value('apiEndGame', 'http://localhost/dual-wine/public/api/game/endGame') // post
+    .value('apiFinishGame', 'http://localhost/dual-wine/public/api/game/finishGame') // post
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',

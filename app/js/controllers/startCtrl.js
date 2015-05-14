@@ -87,6 +87,7 @@ angular.module('dwGame')
             };
 
             $scope.startPendingGame = function(game) {
+                $rootScope.game = game;
                 $rootScope.newGame = false;
                 $rootScope.gameId = game.id;
                 FlashService.dismiss(); // Hiding all flash message from a view to another
@@ -137,26 +138,29 @@ angular.module('dwGame')
                         FlashService.flashPending(); //TODO rajouter l'username
 
                     } else {
+
                         var end = [];
                         end['id'] = $rootScope.gameId;
                         end['user2_answers'] = $rootScope.results;
-                        //console.log(end);
 
-                        QuestionService.endGame(end);
+                        QuestionService.endGame(end).then(function(res) {
 
-                    //.then(function(res) {
-                            //console.log('end : '+res.data);
-                      //  });
+                            var finish = [];
+                            finish['id'] = $rootScope.gameId;
+                            finish['user1_id'] = $rootScope.game.user1_id;
+                            finish['user2_id'] = $rootScope.game.user2_id;
+                            finish['user1_answers'] = $rootScope.game.user1_answers;
+                            finish['user2_answers'] = $rootScope.results;
 
-                        // TODO Déterminer s'il est gagnant ou pas selon les résultats
-                        $location.path('/');
+                            console.log(finish);
 
-                        var winner = true;
-                        if(winner) {
-                            FlashService.flashWinner();
-                        } else {
-                            FlashService.flashLoser();
-                        }
+                            QuestionService.finishGame(finish).then(function(finishRes) {
+                                console.log(finishRes);
+
+                                $location.path('/');
+
+                            });
+                        });
                     }
                 }
             };
