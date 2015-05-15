@@ -18,3 +18,9 @@ body .avatar {
 body .navbar {
   margin-bottom: 0 !important;
 }
+body .sidebar-nav li.active a {
+  color: #d65c4f;
+}
+body .page-content-wrapper {
+  padding: 0 !important;
+}

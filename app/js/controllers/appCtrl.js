@@ -10,4 +10,8 @@ angular.module('dwApplication')
             $scope.setCurrentUser(null);
             $location.path('/login');
         };
+
+        $scope.isActive = function(route) {
+            return route === $location.path();
+        }
     }]);

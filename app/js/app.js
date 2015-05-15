@@ -29,6 +29,14 @@ angular.module('dwApp', [
                     templateUrl: 'partials/question.html',
                     controller: 'StartController'
                 }).
+                when('/stats', {
+                    templateUrl: 'partials/stats.html',
+                    controller: 'StatsController'
+                }).
+                when('/ranking', {
+                    templateUrl: 'partials/ranking.html',
+                    controller: 'RankingController'
+                }).
                 otherwise({
                     redirectTo: '/login'
                 });
@@ -47,12 +55,6 @@ angular.module('dwApp', [
                     $location.path( "/" );
                 }
             }
-
-            //if($rootScope.currentUser) {
-            //    if(next.templateUrl == "partials/home.html") {
-            //        $location.path("/")
-            //    }
-            //}
         });
     });
 
