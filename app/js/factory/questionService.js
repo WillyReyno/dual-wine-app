@@ -1,6 +1,6 @@
 angular.module('dwQuestion')
-    .factory('QuestionService', ['$http', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting', 'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame', 'apiFinishGame',
-        function($http, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting, apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame, apiFinishGame){
+    .factory('QuestionService', ['$http', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting', 'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame', 'apiFinishGame', 'apiFinishTraining',
+        function($http, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting, apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame, apiFinishGame, apiFinishTraining){
             var questionService = {};
 
             questionService.getQuestions = function() {
@@ -92,6 +92,21 @@ angular.module('dwQuestion')
                     user2_answers: array.user2_answers
                 };
                 return $http.post(apiFinishGame, finish)
+                    .success(function(data, status, headers, config) {
+                        // TODO Do something on success ?
+                    })
+                    .error(function(data, status, headers, config) {
+                        // TODO Do something on error
+                    })
+            };
+
+            questionService.endTraining = function(array) {
+                var training = {
+                    user_id: array.user_id,
+                    questions: array.questions,
+                    users_answers: array.users_answers
+                };
+                return $http.post(apiFinishTraining, training)
                     .success(function(data, status, headers, config) {
                         // TODO Do something on success ?
                     })

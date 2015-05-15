@@ -64,11 +64,11 @@ angular.module('dwGame')
             /* Start game and redirect to the first question */
 
             $scope.startGame = function () {
-                $rootScope.newGame = true;
+                $rootScope.gameType = "new";
                 FlashService.dismiss(); // Hiding all flash message from a view to another
 
                 /* Get the 4 questions given by the API */
-                QuestionService.getQuestions().then(function (res) {
+                QuestionService.getQuestions().then(function(res) {
 
 
                     QuestionService.getRandomOtherUser($scope.currentUser.id).then(function (res) {
@@ -76,7 +76,6 @@ angular.module('dwGame')
                     });
 
                     var nextId = $scope.next(res.data, 0); // Retrieve the next question's ID
-                    //console.log($rootScope.questions);
 
                     $location.path('/question/' + nextId); // Go to the next question
                     $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
@@ -88,7 +87,7 @@ angular.module('dwGame')
 
             $scope.startPendingGame = function(game) {
                 $rootScope.game = game;
-                $rootScope.newGame = false;
+                $rootScope.gameType = "pending";
                 $rootScope.gameId = game.id;
                 $rootScope.gameUser1 = game.user1_id;
                 FlashService.dismiss(); // Hiding all flash message from a view to another
@@ -96,6 +95,20 @@ angular.module('dwGame')
 
                 $location.path('/question/' + nextId); // Go to the next question
                 $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
+
+            };
+
+            $scope.startTraining = function() {
+                $rootScope.gameType = "training";
+                FlashService.dismiss(); // Hiding all flash message from a view to another
+
+                QuestionService.getQuestions().then(function(res) {
+
+                    var nextId = $scope.next(res.data, 0); // Retrieve the next question's ID
+
+                    $location.path('/question/' + nextId); // Go to the next question
+                    $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
+                });
 
             };
 
@@ -124,7 +137,7 @@ angular.module('dwGame')
                 // If results == 4, end of the game
                 if ($rootScope.results.length == 4) {
 
-                    if($rootScope.newGame) {
+                    if($rootScope.gameType == "new") {
                         var launch = [];
                         launch['user1_id'] = $scope.currentUser.id;
                         launch['user2_id'] = $rootScope.user2.id;
@@ -139,7 +152,8 @@ angular.module('dwGame')
 
                             $location.path('/');
                         });
-                    } else {
+
+                    } else if($rootScope.gameType == "pending") {
 
                         var end = [];
                         end['id'] = $rootScope.gameId;
@@ -155,7 +169,6 @@ angular.module('dwGame')
                             finish['user2_answers'] = $rootScope.results;
 
                             QuestionService.finishGame(finish).then(function(finishRes) {
-                                console.log(finishRes.data);
                                 if(finishRes.data.exaequo == true) {
                                     QuestionService.getUser($rootScope.gameUser1).then(function(res) {
                                         FlashService.flashExaequo(res.data.username);
@@ -174,6 +187,17 @@ angular.module('dwGame')
 
                             });
                         });
+                    } else if($rootScope.gameType == "training") {
+                        var endTraining = {};
+                        endTraining['user_id'] = $rootScope.currentUser.id;
+                        endTraining['questions'] = [$rootScope.questions[0].id, $rootScope.questions[1].id, $rootScope.questions[2].id, $rootScope.questions[3].id];
+                        endTraining['users_answers'] = $rootScope.results;
+
+                        QuestionService.endTraining(endTraining).then(function(resTraining) {
+                            FlashService.flashTraining(resTraining.data.score);
+                            $location.path('/');
+                        });
+                        console.log(endTraining);
                     }
                 }
             };

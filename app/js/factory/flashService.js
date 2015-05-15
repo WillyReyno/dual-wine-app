@@ -72,6 +72,11 @@ angular.module('dwApplication')
             Flash.create('info', message);
         };
 
+        flashService.flashTraining = function(score) {
+            var message = 'Vous avez obtenu un score de '+ score +' !';
+            Flash.create('info', message);
+        };
+
         return flashService;
     }]);
 
