@@ -34,26 +34,72 @@ Then, run this script to get the list.
 })();
 
 
+
 */
+
+/* Default colors
+
+@background: #eeeeee;
+
 @primary : #009688;
 @primaryHover : #00aa9a;
+@primaryActive: #00b5a4;
 
 @black : #000000;
 @white : #ffffff;
 
 @inverse : #3f51b5;
+@inverseActive: #5062c2;
 
 @success : #4caf50;
 @successHover : #59b75c;
+@successActive: #60ba63;
 
 @info: #03a9f4;
 @infoHover: #0fb2fc;
+@infoActive: #19b6fc;
 
 @warning: #ff5722;
 @warningHover: #ff6736;
+@warningActive: #ff6e41;
 
 @danger: #f44336;
 @dangerHover: #f55549;
+@dangerActive: #f65e53;
+ */
+
+@abackground: #efe4d0; //background
+@main: #8a1e3e; // main
+@button: #c13645; //button
+@other: #d65c4f;
+
+@background: #efe4d0;
+
+@primary : #8a1e3e;
+@primaryHover : lighten(@primary, 20%);
+@primaryActive: lighten(@primary, 25%);
+
+@black : #000000;
+@white : #ffffff;
+
+@inverse : #3f51b5;
+@inverseActive: #5062c2;
+
+@success : #4caf50;
+@successHover : #59b75c;
+@successActive: #60ba63;
+
+@info: #03a9f4;
+@infoHover: #0fb2fc;
+@infoActive: #19b6fc;
+
+@warning: #ff5722;
+@warningHover: #ff6736;
+@warningActive: #ff6e41;
+
+@danger: #f44336;
+@dangerHover: #f55549;
+@dangerActive: #f65e53;
 
 
 @font-face {
@@ -193,7 +239,7 @@ Then, run this script to get the list.
 }
 .mdi-border {
   padding: .2em .25em .15em;
-  border: solid 0.08em #eeeeee;
+  border: solid 0.08em @background;
   border-radius: .1em;
 }
 .mdi-spin {
@@ -2574,7 +2620,7 @@ Then, run this script to get the list.
   content: "\e8f5";
 }
 body {
-  background-color: #eeeeee;
+  background-color: @background;
 }
 body.inverse {
   background: #333333;
@@ -3191,22 +3237,22 @@ body .jumbotron-material-blue-grey,
   background-color: #f0f0f0;
 }
 .btn-inverse:active:not(.btn-link):not(.btn-flat) {
-  background-color: #5062c2;
+  background-color: @inverseActive;
 }
 .btn-primary:active:not(.btn-link):not(.btn-flat) {
-  background-color: #00b5a4;
+  background-color: @primaryActive;
 }
 .btn-success:active:not(.btn-link):not(.btn-flat) {
-  background-color: #60ba63;
+  background-color: @successActive;
 }
 .btn-info:active:not(.btn-link):not(.btn-flat) {
-  background-color: #19b6fc;
+  background-color: @infoActive;
 }
 .btn-warning:active:not(.btn-link):not(.btn-flat) {
-  background-color: #ff6e41;
+  background-color: @warningActive;
 }
 .btn-danger:active:not(.btn-link):not(.btn-flat) {
-  background-color: #f65e53;
+  background-color: @dangerActive;
 }
 .btn-material-red:active:not(.btn-link):not(.btn-flat) {
   background-color: #f65e53;
@@ -7438,7 +7484,7 @@ icon-material-blue-grey {
 }
 .panel > .panel-heading,
 .panel-default > .panel-heading {
-  background-color: #eeeeee;
+  background-color: @background;
 }
 .panel-black > .panel-heading {
   background-color: @black;
@@ -7530,7 +7576,7 @@ icon-material-blue-grey {
   color: rgba(0, 0, 0, 0.84);
 }
 .panel-footer {
-  background-color: #eeeeee;
+  background-color: @background;
 }
 hr.on-dark {
   color: #1a1a1a;
@@ -8180,7 +8226,7 @@ hr.on-light {
 .selectize-control.multi .selectize-dropdown .selected,
 .selectize-control.single .selectize-dropdown .selected.active,
 .selectize-control.multi .selectize-dropdown .selected.active {
-  background-color: #EEEEEE;
+  background-color: @background;
 }
 .selectize-control.single .selectize-dropdown [data-selectable],
 .selectize-control.multi .selectize-dropdown [data-selectable],

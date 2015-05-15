@@ -52,19 +52,28 @@ angular.module('dwApplication')
             Flash.create('danger', message);
         };
 
-        flashService.flashWinner = function() {
-            var message = 'Félicitations, vous avez remporté la partie !';
+        flashService.flashWinner = function(opponent) {
+            var message = 'Félicitations, vous avez remporté la partie contre '+ opponent +' !';
             Flash.create('success', message);
         };
 
-        flashService.flashLoser = function() {
-            var message = 'Dommage, vous avez perdu !';
+        flashService.flashLoser = function(opponent) {
+            var message = 'Dommage, vous avez perdu contre '+ opponent +' !';
             Flash.create('danger', message);
         };
 
-        flashService.flashPending = function() {
-            // TODO Mettre le pseudo du joueur
-            var message = 'En attente du second joueur.';
+        flashService.flashExaequo = function(opponent) {
+            var message = 'Vous êtes exaequo avec '+ opponent +' !';
+            Flash.create('danger', message);
+        };
+
+        flashService.flashPending = function(opponent) {
+            var message = 'En attente de '+ opponent +' !';
+            Flash.create('info', message);
+        };
+
+        flashService.flashTraining = function(score) {
+            var message = 'Vous avez obtenu un score de '+ score +' !';
             Flash.create('info', message);
         };
 

@@ -2,7 +2,7 @@ angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
-    'dwValues', 'flash'])
+    'dwValues', 'flash', 'ui.gravatar'])
     .config(function($httpProvider){
         $httpProvider.interceptors.push([
             '$injector',
