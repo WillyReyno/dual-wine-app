@@ -191,13 +191,12 @@ angular.module('dwGame')
                         var endTraining = {};
                         endTraining['user_id'] = $rootScope.currentUser.id;
                         endTraining['questions'] = [$rootScope.questions[0].id, $rootScope.questions[1].id, $rootScope.questions[2].id, $rootScope.questions[3].id];
-                        endTraining['users_answers'] = $rootScope.results;
+                        endTraining['user_answers'] = $rootScope.results;
 
-                        QuestionService.endTraining(endTraining).then(function(resTraining) {
-                            FlashService.flashTraining(resTraining.data.score);
+                        QuestionService.endTraining(endTraining).then(function(res) {
+                            FlashService.flashTraining(res.data.correct_answers);
                             $location.path('/');
                         });
-                        console.log(endTraining);
                     }
                 }
             };

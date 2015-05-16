@@ -1,1 +1,22 @@
-ranking
+<div ng-controller="RankingController" class="col-md-12">
+    <div class="col-md-12">
+        <h2>Classement</h2>
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Victoires</th>
+                <th>Défaites</th>
+                <th>Exaequo</th>
+                <th>Ratio</th>
+            </tr>
+
+            <tr ng-repeat="user in ranking">
+                <td>{{user.username}}</td>
+                <td>{{user.won_game}}</td>
+                <td>{{user.lost_game}}</td>
+                <td>{{user.exaequo}}</td>
+                <td>{{(user.won_game / (user.won_game + user.lost_game + user.exaequo)) * 100 | number:0}} %</td>
+            </tr>
+        </table>
+    </div>
+</div>

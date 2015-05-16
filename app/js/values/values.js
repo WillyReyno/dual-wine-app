@@ -12,6 +12,10 @@ angular.module('dwValues', [])
     .value('apiEndGame', 'http://localhost/dual-wine/public/api/game/endGame') // post
     .value('apiFinishGame', 'http://localhost/dual-wine/public/api/game/finishGame') // post
     .value('apiFinishTraining', 'http://localhost/dual-wine/public/api/game/finishTraining') // post
+    .value('apiBestPlayers', 'http://localhost/dual-wine/public/api/game/bestPlayers') // get
+    .value('apiGetUserTraining', 'http://localhost/dual-wine/public/api/game/getUserTraining') // post
+    .value('apiGetUserOpponents', 'http://localhost/dual-wine/public/api/game/getUserOpponents') // post
+
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',

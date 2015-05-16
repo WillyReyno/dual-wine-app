@@ -34,21 +34,17 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li ng-if="currentUser" ng-class="{active:isActive('/')}">
-                <a href="#/">Accueil</a>
+                <a href="#/" class="navig">Accueil</a>
             </li>
             <li ng-if="currentUser" ng-class="{active:isActive('/stats')}">
-                <a href="#/stats">Statistiques</a>
+                <a href="#/stats" class="navig">Statistiques</a>
             </li>
             <li ng-if="currentUser" ng-class="{active:isActive('/ranking')}">
-                <a href="#/ranking">Classement</a>
+                <a href="#/ranking" class="navig">Classement</a>
             </li>
             <li ng-if="currentUser">
-                <a ng-click="logout()" href="#">Déconnexion</a>
+                <a ng-click="logout()" href="#" class="navig">Déconnexion</a>
             </li>
-
-
-
-
         </ul>
     </div>
     <div id="page-content-wrapper">
@@ -66,10 +62,21 @@
     </div>
 </div>
 <script>
+
+    $(document).on('click', '.navig', function(e) {
+        if($("#wrapper").hasClass("toggled")) {
+            e.preventDefault();
+            $("#wrapper").removeClass("toggled");
+        }
+    });
+
+
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+
 
     $('#page-content-wrapper').click(function(e) {
         if($("#wrapper").hasClass("toggled")) {

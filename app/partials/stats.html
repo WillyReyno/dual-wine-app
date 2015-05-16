@@ -1,1 +1,16 @@
-<strong>Nombre de parties jouées</strong> : {{currentUser.won_game + currentUser.lost_game + currentUser.exaequo}}
+
+
+<div ng-controller="StatsController" class="col-md-12">
+    <div class="col-md-12">
+        <h2>Statistiques</h2>
+
+        <strong>Parties gagnées :</strong> {{currentUser.won_game}}<br>
+        <strong>Parties perdues :</strong> {{currentUser.lost_game}}<br>
+        <strong>Exaequo :</strong> {{currentUser.exaequo}}<br>
+        <strong>Nombre de parties totales :</strong> {{currentUser.won_game + currentUser.lost_game + currentUser.exaequo}}<br>
+        <strong>Nombre de parties entraînement :</strong> {{countTrainings}}<br>
+        <!--<strong>Nombre d'adversaires rencontrés :</strong>  {{countOpponents}}<br>-->
+        <strong>Nombre d'adversaires qui vous attendent :</strong>  {{waitingYou}}<br>
+        <strong>Nombre d'adversaires que vous attendez :</strong>  {{waitingOther}}<br>
+    </div><br>
+</div>

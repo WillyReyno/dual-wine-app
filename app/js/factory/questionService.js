@@ -1,6 +1,12 @@
 angular.module('dwQuestion')
-    .factory('QuestionService', ['$http', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting', 'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame', 'apiFinishGame', 'apiFinishTraining',
-        function($http, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting, apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame, apiFinishGame, apiFinishTraining){
+    .factory('QuestionService', ['$http', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting',
+        'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame', 'apiFinishGame', 'apiFinishTraining',
+        'apiBestPlayers', 'apiGetUserTraining', 'apiGetUserOpponents',
+        function($http, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting,
+                 apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame, apiFinishGame, apiFinishTraining,
+                 apiBestPlayers, apiGetUserTraining, apiGetUserOpponents){
+
+
             var questionService = {};
 
             questionService.getQuestions = function() {
@@ -104,7 +110,7 @@ angular.module('dwQuestion')
                 var training = {
                     user_id: array.user_id,
                     questions: array.questions,
-                    users_answers: array.users_answers
+                    user_answers: array.user_answers
                 };
                 return $http.post(apiFinishTraining, training)
                     .success(function(data, status, headers, config) {
@@ -124,6 +130,37 @@ angular.module('dwQuestion')
                         // TODO Do something on error
                     })
             };
+
+            questionService.getRanking = function() {
+                return $http.get(apiBestPlayers)
+                    .success(function(data, status, headers, config) {
+                        // TODO Do something on success ?
+                    })
+                    .error(function(data, status, headers, config){
+                        // TODO Do something on error
+                    })
+            };
+
+            questionService.getUserTraining = function(user_id) {
+                return $http.post(apiGetUserTraining, {user_id: user_id})
+                    .success(function(data, status, headers, config) {
+                        // TODO Do something on success ?
+                    })
+                    .error(function(data, status, headers, config) {
+                        // TODO Do something on error
+                    })
+            };
+
+            questionService.getUserOpponents = function(user_id) {
+                return $http.post(apiGetUserOpponents, {user_id: user_id})
+                    .success(function(data, status, headers, config) {
+                        // TODO Do something on success ?
+                    })
+                    .error(function(data, status, headers, config) {
+                        // TODO Do something on error
+                    })
+            };
+
 
             return questionService;
         }]);

@@ -73,7 +73,15 @@ angular.module('dwApplication')
         };
 
         flashService.flashTraining = function(score) {
-            var message = 'Vous avez obtenu un score de '+ score +' !';
+            var message = "";
+            if(score == 0) {
+                message = 'Vous n\'avez trouvé aucune bonne réponse.';
+            } else if(score == 1) {
+                message = 'Vous avez trouvé '+ score +' bonne réponse !';
+            } else {
+                message = 'Vous avez trouvé '+ score +' bonnes réponses !';
+            }
+
             Flash.create('info', message);
         };
 
