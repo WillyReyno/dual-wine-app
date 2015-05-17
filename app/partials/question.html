@@ -1,11 +1,11 @@
 <div ng-controller="StartController" class="col-md-12">
 
-    <div class="col-md-12">
+    <div class="col-md-12 questions">
         <h2>{{ currentQuestion.question }}</h2>
+
+        <form>
+            <button ng-repeat="answer in currentAnswers" type="submit" class="col-md-5 col-xs-12 btn btn-lg btn-primary btn-raised" ng-click="submit(answer.value)">{{ answer.content }}</button>
+        </form>
+
     </div>
-
-    <form>
-        <button ng-repeat="answer in currentAnswers" type="submit" class="col-md-5 col-xs-12 btn btn-primary btn-raised" ng-click="submit(answer.value)">{{ answer.content }}</button>
-    </form>
-
 </div>

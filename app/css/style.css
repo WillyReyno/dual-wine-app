@@ -1,5 +1,6 @@
 body {
   font-family: 'Muli', sans-serif !important;
+  overflow: hidden;
 }
 body h1,
 body h2,
@@ -23,4 +24,24 @@ body .sidebar-nav li.active a {
 }
 body .page-content-wrapper {
   padding: 0 !important;
+}
+body .questions h2 {
+  font-size: 1.7em;
+}
+body .questions button {
+  white-space: normal !important;
+  text-transform: none !important;
+}
+body .buttons {
+  margin-top: 25px;
+}
+body .panels {
+  margin-top: 25px;
+  padding: 0 !important;
+}
+body .panel-heading {
+  color: #fff !important;
+  background: #8a1e3e !important;
+  letter-spacing: 1px !important;
+  margin-top: 1px !important;
 }
