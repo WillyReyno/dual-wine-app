@@ -31,11 +31,21 @@
 @dangerHover: #f55549;
 @dangerActive: #f65e53;
 
+.superCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%,  -50%);
+}
 
 body {
   font-family: 'Muli', sans-serif !important;
   overflow:hidden;
 
+  .testa {
+    .superCenter();
+  }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
@@ -58,6 +68,8 @@ body {
 
   .page-content-wrapper {
     padding:0 !important;
+    height:500px;
+    position:relative;
   }
 
   .questions {

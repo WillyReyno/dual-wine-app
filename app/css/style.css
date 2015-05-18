@@ -2,6 +2,13 @@ body {
   font-family: 'Muli', sans-serif !important;
   overflow: hidden;
 }
+body .testa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 body h1,
 body h2,
 body h3,
@@ -24,6 +31,8 @@ body .sidebar-nav li.active a {
 }
 body .page-content-wrapper {
   padding: 0 !important;
+  height: 500px;
+  position: relative;
 }
 body .questions h2 {
   font-size: 1.7em;
