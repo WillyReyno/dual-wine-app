@@ -2,13 +2,6 @@ body {
   font-family: 'Muli', sans-serif !important;
   overflow: hidden;
 }
-body .testa {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
 body h1,
 body h2,
 body h3,
@@ -36,16 +29,30 @@ body .page-content-wrapper {
 }
 body .questions h2 {
   font-size: 1.7em;
+  margin-bottom: 25px;
 }
 body .questions button {
   white-space: normal !important;
   text-transform: none !important;
 }
+body .bars {
+  font-size: 1.4em;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  float: right;
+  margin-bottom: 8px;
+  margin-right: 15px;
+  margin-top: 8px;
+  padding: 9px 10px;
+  position: relative;
+}
 body .buttons {
   margin-top: 25px;
 }
 body .panels {
-  margin-top: 25px;
+  margin-top: 10px;
   padding: 0 !important;
 }
 body .panel-heading {
@@ -53,4 +60,7 @@ body .panel-heading {
   background: #8a1e3e !important;
   letter-spacing: 1px !important;
   margin-top: 1px !important;
+}
+body .btn-training {
+  background: #d65c4f;
 }

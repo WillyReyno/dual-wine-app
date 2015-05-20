@@ -85,17 +85,17 @@ Then, run this script to get the list.
 @inverse : #3f51b5;
 @inverseActive: #5062c2;
 
-@success : @main; // #4caf50
+@success : #4caf50; // new => @main
 @successHover : #59b75c;
 @successActive: #60ba63;
 
-@info: @other; // TODO changer que le bouton entrainement @other #03a9f4
+@info: #03a9f4; // TODO changer que le bouton entrainement @other
 @infoHover: #0fb2fc;
 @infoActive: #19b6fc;
 
-@warning: #ff5722;
-@warningHover: #ff6736;
-@warningActive: #ff6e41;
+@warning: #d65c4f;
+@warningHover: lighten(@warning, 20%);
+@warningActive: lighten(@warning, 25%);
 
 @danger: #f44336;
 @dangerHover: #f55549;
