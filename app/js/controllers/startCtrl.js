@@ -122,9 +122,6 @@ angular.module('dwGame')
                 if ($rootScope.step <= 3) {
                     $rootScope.results.push(result);
 
-                    //console.log($rootScope.results);
-
-
                     $rootScope.step++;
 
                     if($rootScope.step < 4) {
