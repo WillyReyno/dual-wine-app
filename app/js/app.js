@@ -2,7 +2,8 @@ angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
-    'dwValues', 'flash', 'ui.gravatar'])
+    'dwValues', 'flash', 'ui.gravatar',
+    'dwTest'])
     .config(function($httpProvider){
         $httpProvider.interceptors.push([
             '$injector',
@@ -62,3 +63,4 @@ angular.module("dwApplication", []);
 angular.module("dwAuth", []);
 angular.module("dwGame", []);
 angular.module("dwQuestion", []);
+angular.module("dwTest", []);

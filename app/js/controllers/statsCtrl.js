@@ -3,9 +3,9 @@ angular.module('dwApp')
         function ($scope, $rootScope, QuestionService, $location, FlashService) {
             FlashService.dismiss(); // Hiding all flash message from a view to another
 
-            QuestionService.getUserOpponents($rootScope.currentUser.id).then(function(res){
-                $scope.countOpponents = res.data;
-            });
+            //QuestionService.getUserOpponents($rootScope.currentUser.id).then(function(res){
+            //    $scope.countOpponents = res.data;
+            //});
 
             QuestionService.getUserTraining($rootScope.currentUser.id).then(function(res){
                 $scope.countTrainings = res.data;
