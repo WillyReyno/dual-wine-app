@@ -32,6 +32,17 @@ angular.module('dwApp', [
                 }).
                 when('/stats', {
                     templateUrl: 'partials/stats.html',
+                    resolve: {
+                        countTrainings: function($rootScope, QuestionService) {
+                            return QuestionService.getUserTraining($rootScope.currentUser.id);
+                        },
+                        waitingYou: function($rootScope, QuestionService) {
+                            return QuestionService.getUserGameNotPlayed($rootScope.currentUser.id);
+                        },
+                        waitingOther: function($rootScope, QuestionService) {
+                            return QuestionService.getUserGameWaiting($rootScope.currentUser.id);
+                        }
+                    },
                     controller: 'StatsController'
                 }).
                 when('/ranking', {

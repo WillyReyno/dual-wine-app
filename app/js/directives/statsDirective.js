@@ -5,7 +5,7 @@ angular.module('dwTest')
             restrict: 'A',
             link: function(scope, elem, attrs) {
 
-                // Chart des parties gagnées / perdues / exaequo
+                // Chart des parties gagnï¿½es / perdues / exaequo
                 var ctx_wle  = $("#winLoseExChart").get(0).getContext("2d");
 
                 var data_wle = [
@@ -19,7 +19,7 @@ angular.module('dwTest')
                         value: scope.currentUser.lost_game,
                         color:"rgba(193,54,69,1)",
                         highlight:"rgba(193,54,69,0.75)",
-                        label:"Défaites"
+                        label:"Dï¿½faites"
                     },
                     {
                         value:scope.currentUser.exaequo,
@@ -34,7 +34,8 @@ angular.module('dwTest')
                     scaleBeginAtZero : true
                 });
 
-                // Chart des parties jouées / entrainement
+                // Chart des parties jouï¿½es / entrainement
+
 
                 var ctx_game  = $("#gameChart").get(0).getContext("2d");
                 var data_game = [
@@ -52,7 +53,6 @@ angular.module('dwTest')
                     }
                 ];
 
-                console.log(data_game);
                 var gameChart = new Chart(ctx_game).Pie(data_game, {
                     scaleBeginAtZero : true
                 });
