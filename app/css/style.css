@@ -1,6 +1,14 @@
 body {
   font-family: 'Muli', sans-serif !important;
-  overflow: hidden;
+  overflow-x: hidden;
+}
+body .logo {
+  top: 10%;
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
 }
 body h1,
 body h2,
@@ -63,4 +71,31 @@ body .panel-heading {
 }
 body .btn-training {
   background: #d65c4f;
+}
+body .stats h3 {
+  text-align: center;
+}
+body .stats .number {
+  font-size: 6em;
+  text-align: center;
+  display: block;
+}
+body .stats .doughnut-legend,
+body .stats .pie-legend {
+  text-align: center;
+}
+body .doughnut-legend,
+body .pie-legend {
+  margin-top: 10px;
+}
+body .doughnut-legend li,
+body .pie-legend li {
+  margin-bottom: 15px;
+}
+body .doughnut-legend li span,
+body .pie-legend li span {
+  border-radius: 5px;
+  color: white;
+  margin: 5px;
+  padding: 5px;
 }

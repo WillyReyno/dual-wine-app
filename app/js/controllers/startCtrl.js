@@ -1,10 +1,10 @@
 angular.module('dwGame')
     .controller('HomeController', ['$scope', '$rootScope', 'QuestionService', function($scope, $rootScope, QuestionService) {
-        QuestionService.getUserGameNotPlayed($rootScope.currentUser.id).then(function(res) {
+        QuestionService.getUserGameNotPlayedAlt($rootScope.currentUser.id).then(function(res) {
             $scope.players = res.data;
         });
 
-        QuestionService.getUserGameWaiting($rootScope.currentUser.id).then(function(res) {
+        QuestionService.getUserGameWaitingAlt($rootScope.currentUser.id).then(function(res) {
             $scope.others = res.data;
         });
     }])
@@ -47,16 +47,16 @@ angular.module('dwGame')
 
                     /* Formating the object with true and false answers */
                     questionJson.question = res.data.question;
-                    var tests = [];
+                    var answers = [];
                     for (var i = 1; i <= 4; i++) {
-                        tests.push({
+                        answers.push({
                             "content":res.data['answer_' + i],
                             "value": i == 1
                         });
                     }
-                    shuffle(tests);
+                    shuffle(answers);
                     $rootScope.currentQuestion = questionJson;
-                    $rootScope.currentAnswers = tests;
+                    $rootScope.currentAnswers = answers;
 
                 });
             };
@@ -120,7 +120,14 @@ angular.module('dwGame')
                 }
 
                 if ($rootScope.step <= 3) {
+                    if($rootScope.results == true) {
+                        FlashService.flashTrueAnswer();
+                    } else {
+                        FlashService.flashFalseAnswer();
+                    }
+
                     $rootScope.results.push(result);
+
 
                     $rootScope.step++;
 

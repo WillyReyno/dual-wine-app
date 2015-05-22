@@ -53,9 +53,23 @@
 
     </div>
 </div>
-<div ng-if="!currentUser" class="testa">
-    <div class="col-md-12">
-        <a href="#/login" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Connexion</a>
-        <a href="#/register" class="col-xs-10 col-xs-push-1 btn btn-lg btn-primary">Inscription</a>
+<div ng-if="!currentUser">
+    <img src="img/logo_illu_red.png" class="logo img-responsive">
+    <div class="testa" style="display:flex;justify-content:center;align-items:center; width:100%;">
+        <div class="col-md-12">
+            <a href="#/login" class="col-xs-12 col-md-10 col-md-push-1 btn btn-lg btn-primary">Connexion</a>
+            <a href="#/register" class="col-xs-12 col-md-10 col-md-push-1 btn btn-lg btn-primary">Inscription</a>
+        </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            var screenHeight = $(window).height()-50;
+            $('.testa').css({height:screenHeight});
+        });
+
+        $(window).resize(function() {
+            var screenHeight = $(window).height()-50;
+            $('.testa').css('height', screenHeight);
+        });
+    </script>
 </div>

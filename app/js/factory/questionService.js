@@ -1,10 +1,10 @@
 angular.module('dwQuestion')
     .factory('QuestionService', ['$http', '$q', 'apiUser', 'apiQuestions', 'apiSingleQuestion', 'apiUserGameWaiting',
         'apiUserGameNotPlayed', 'apiUserRandomOther', 'apiLaunchGame', 'apiEndGame', 'apiFinishGame', 'apiFinishTraining',
-        'apiBestPlayers', 'apiGetUserTraining', 'apiGetUserOpponents',
+        'apiBestPlayers', 'apiGetUserTraining', 'apiGetUserOpponents', 'apiGetUserTrainingStats',
         function($http, $q, apiUser, apiQuestions, apiSingleQuestion, apiUserGameWaiting,
                  apiUserGameNotPlayed, apiUserRandomOther, apiLaunchGame, apiEndGame, apiFinishGame, apiFinishTraining,
-                 apiBestPlayers, apiGetUserTraining, apiGetUserOpponents){
+                 apiBestPlayers, apiGetUserTraining, apiGetUserOpponents, apiGetUserTrainingStats){
 
 
             var questionService = {};
@@ -49,6 +49,10 @@ angular.module('dwQuestion')
                 return deferred.promise;
             };
 
+            questionService.getUserGameNotPlayedAlt = function(user_id) {
+                return $http.post(apiUserGameNotPlayed, {id: user_id});
+            };
+
             questionService.getUserGameWaiting = function(user_id) {
                 var deferred = $q.defer();
                 $http.post(apiUserGameWaiting, {id: user_id})
@@ -57,6 +61,10 @@ angular.module('dwQuestion')
                     }
                 );
                 return deferred.promise;
+            };
+
+            questionService.getUserGameWaitingAlt = function(user_id) {
+                return $http.post(apiUserGameWaiting, {id: user_id});
             };
 
             questionService.launchGame = function(array) {
@@ -152,13 +160,23 @@ angular.module('dwQuestion')
             };
 
             questionService.getUserOpponents = function(user_id) {
-                return $http.post(apiGetUserOpponents, {user_id: user_id})
-                    .success(function(data, status, headers, config) {
-                        // TODO Do something on success ?
-                    })
-                    .error(function(data, status, headers, config) {
-                        // TODO Do something on error
-                    })
+                var deferred = $q.defer();
+                $http.post(apiGetUserOpponents, {user_id: user_id})
+                    .success(function(data) {
+                        deferred.resolve(data);
+                    }
+                );
+                return deferred.promise;
+            };
+
+            questionService.getUserTrainingStats = function(user_id) {
+                var deferred = $q.defer();
+                $http.post(apiGetUserTrainingStats, {user_id: user_id})
+                    .success(function(data){
+                        deferred.resolve(data);
+                    }
+                );
+                return deferred.promise;
             };
 
 

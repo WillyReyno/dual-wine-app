@@ -52,7 +52,7 @@
                 <div class="flash" flash-message="5000"></div>
             </div>
 
-            <div class="row testo">
+            <div class="row">
                 <div ng-view></div>
             </div>
 
@@ -60,13 +60,6 @@
     </div>
 </div>
 <script>
-
-    var screenHeight = $(window).height() - 50;
-    $('.testo').css('height',screenHeight+'px');
-    $(window).resize(function() {
-        var screenHeight = $(window).height() - 50;
-        $('.testo').css('height',screenHeight+'px');
-    });
 
 
     $(document).on('click', '.navig', function(e) {

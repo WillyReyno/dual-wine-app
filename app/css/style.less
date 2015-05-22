@@ -41,10 +41,16 @@
 
 body {
   font-family: 'Muli', sans-serif !important;
-  overflow:hidden;
+  overflow-x:hidden;
 
-  .testa {
-    //.superCenter();
+  .logo {
+    top:10%;
+    width:200px;
+    position:absolute;
+    left:50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%,  0);
+
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -93,7 +99,7 @@ body {
     float: right;
     margin-bottom: 8px;
     margin-right: 15px;
-   margin-top: 8px;
+    margin-top: 8px;
     padding: 9px 10px;
     position: relative;
   }
@@ -116,5 +122,37 @@ body {
 
   .btn-training {
     background:@other;
+  }
+
+  .stats {
+    h3 {
+      text-align: center;
+    }
+    .number {
+      font-size:6em;
+      text-align: center;
+      display:block;
+    }
+    .doughnut-legend, .pie-legend {
+      text-align: center;
+    }
+
+    .legends {
+      //margin-top:20px;
+    }
+  }
+  .doughnut-legend, .pie-legend {
+    margin-top:10px;
+    li {
+      margin-bottom:15px;
+      //display: inline-block;
+      span {
+        border-radius: 5px;
+        color: white;
+        margin: 5px;
+        padding: 5px;
+
+      }
+    }
   }
 }

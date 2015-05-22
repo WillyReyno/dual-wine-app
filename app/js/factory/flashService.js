@@ -85,6 +85,16 @@ angular.module('dwApplication')
             Flash.create('info', message);
         };
 
+        flashService.flashTrueAnswer = function() {
+            var message = "Bonne réponse !";
+            Flash.create('success', message);
+        };
+
+        flashService.flashFalseAnswer = function() {
+            var message = "Mauvaise réponse !";
+            Flash.create('danger', message);
+        };
+
         return flashService;
     }]);
 

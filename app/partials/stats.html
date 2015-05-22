@@ -2,28 +2,47 @@
 
     <div class="col-md-12">
         <h2>Statistiques</h2>
-
-        <strong>Parties gagnées :</strong> {{currentUser.won_game}}<br>
-        <strong>Parties perdues :</strong> {{currentUser.lost_game}}<br>
-        <strong>Exaequo :</strong> {{currentUser.exaequo}}<br>
-        <strong>Nombre de parties totales :</strong> {{currentUser.won_game + currentUser.lost_game + currentUser.exaequo}}<br>
-        <strong>Nombre de parties entraînement :</strong> {{countTrainings}}<br>
-        <!--<strong>Nombre d'adversaires rencontrés :</strong>  {{countOpponents}}<br>-->
-        <strong>Nombre d'adversaires qui vous attendent :</strong>  {{waitingYou}}<br>
-        <strong>Nombre d'adversaires que vous attendez :</strong>  {{waitingOther}}<br>
-
         <div stats-directive>
 
-            <div class="col-md-3">
-                <canvas id="winLoseExChart" width="400" height="400"></canvas>
+            <div class="stats col-md-12 clearfix">
+
+                <h3>Résultats</h3>
+                <div class="col-md-3 col-xs-7 col-md-offset-0">
+                    <canvas id="winLoseExChart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-3 col-xs-5">
+                    <div class="legends" id="legendFirst"></div>
+                </div>
             </div>
 
-            <div class="col-md-3 col-md-offset-1">
-                <canvas id="gameChart" width="400" height="400"></canvas>
+            <div class="stats col-md-12 clearfix">
+                <h3>Nombre de parties</h3>
+                <div class="col-md-3 col-xs-7 col-md-offset-0">
+                    <canvas id="gameChart" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-3 col-xs-5">
+                    <div class="legends" id="legendSecond"></div>
+                </div>
             </div>
 
-            <div class="col-md-3 col-md-offset-1">
+            <div class="stats col-md-3 col-xs-8 col-xs-offset-2 col-md-offset-1">
+                <h3>Bonnes réponses (entraînement)</h3>
                 <canvas id="waitChart" width="400" height="400"></canvas>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Adversaires rencontrés</h3>
+                <span class="number">{{countOpponents}}</span>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Joueurs en attente</h3>
+                <span class="number">{{waitingOther}}</span>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Joueurs qui vous attendent</h3>
+                <span class="number">{{waitingYou}}</span>
             </div>
         </div>
     </div>

@@ -36,11 +36,17 @@ angular.module('dwApp', [
                         countTrainings: function($rootScope, QuestionService) {
                             return QuestionService.getUserTraining($rootScope.currentUser.id);
                         },
+                        countOpponents: function($rootScope, QuestionService) {
+                            return QuestionService.getUserOpponents($rootScope.currentUser.id);
+                        },
                         waitingYou: function($rootScope, QuestionService) {
                             return QuestionService.getUserGameNotPlayed($rootScope.currentUser.id);
                         },
                         waitingOther: function($rootScope, QuestionService) {
                             return QuestionService.getUserGameWaiting($rootScope.currentUser.id);
+                        },
+                        trainingStats: function($rootScope, QuestionService) {
+                            return QuestionService.getUserTrainingStats($rootScope.currentUser.id);
                         }
                     },
                     controller: 'StatsController'
