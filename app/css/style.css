@@ -87,6 +87,9 @@ body .stats .doughnut-legend,
 body .stats .pie-legend {
   text-align: center;
 }
+body .stats .errormsg {
+  text-align: center;
+}
 body .doughnut-legend,
 body .pie-legend {
   margin-top: 10px;

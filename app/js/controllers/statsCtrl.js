@@ -8,7 +8,6 @@ angular.module('dwApp')
             $scope.countTrainings = countTrainings;
 
             $scope.trainingStats = trainingStats;
-            console.log($scope.trainingStats[0]);
 
             $scope.countOpponents = countOpponents;
 
