@@ -6,10 +6,10 @@
             <div class="stats col-md-12 clearfix">
                 <h3>Résultats</h3>
                 <span ng-hide="currentUser.won_game + currentUser.lost_game + currentUser.exaequo == 0">
-                    <div class="col-md-3 col-xs-7 col-md-offset-0">
+                    <div class="col-md-3 col-xs-12 col-md-offset-0">
                         <canvas id="winLoseExChart" width="400" height="400"></canvas>
                     </div>
-                    <div class="col-md-3 col-xs-5">
+                    <div class="col-md-3 col-xs-12">
                         <div class="legends" id="legendFirst"></div>
                     </div>
                 </span>
@@ -21,10 +21,10 @@
             <div class="stats col-md-12 clearfix">
                 <h3>Nombre de parties</h3>
                 <span ng-show="currentUser.won_game + currentUser.lost_game + currentUser.exaequo > 0 || countTrainings > 0">
-                    <div class="col-md-3 col-xs-7 col-md-offset-0">
+                    <div class="col-md-3 col-xs-12 col-md-offset-0">
                         <canvas id="gameChart" width="400" height="400"></canvas>
                     </div>
-                    <div class="col-md-3 col-xs-5">
+                    <div class="col-md-3 col-xs-12">
                         <div class="legends" id="legendSecond"></div>
                     </div>
                 </span>
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="stats col-md-3 col-xs-8 col-xs-offset-2 col-md-offset-1">
+            <div class="stats col-md-12">
                 <h3>Bonnes réponses (entraînement)</h3>
                 <span ng-show="trainingStats[0] + trainingStats[1] + trainingStats[2] + trainingStats[3] + trainingStats[4] > 0">
                     <div class="col-md-12">

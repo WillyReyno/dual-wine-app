@@ -49,10 +49,9 @@ angular.module('dwTest')
 
 
                 var ctx_game  = $("#gameChart").get(0).getContext("2d");
-                var value = scope.currentUser.won_game + scope.currentUser.lost_game + scope.currentUser.exaequo;
                 var data_game = [
                     {
-                        value: value,
+                        value: scope.currentUser.won_game + scope.currentUser.lost_game + scope.currentUser.exaequo,
                         color:"rgba(138,30,62,1)",
                         highlight:"rgba(138,30,62,0.75)",
                         label:"Parties"
