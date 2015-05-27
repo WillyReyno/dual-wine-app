@@ -1,6 +1,9 @@
+html {
+  overflow-x: hidden !important;
+}
 body {
   font-family: 'Muli', sans-serif !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 body .logo {
   top: 10%;
