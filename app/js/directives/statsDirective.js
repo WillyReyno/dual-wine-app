@@ -57,7 +57,7 @@ angular.module('dwTest')
                         label:"Parties"
                     },
                     {
-                        value:scope.countTrainings, // TODO correct this
+                        value:scope.countTrainings,
                         color:"rgba(214,92,79,1)",
                         highlight:"rgba(214,92,79,0.75)",
                         label:"Entrainements"

@@ -14,7 +14,7 @@
                     </div>
                 </span>
                 <div class="errormsg col-xs-12" ng-show="currentUser.won_game == 0 && currentUser.lost_game == 0 && currentUser.exaequo == 0">
-                    <p>Vous devez jouer pour voir ces statistiques.</p>
+                    <p>Vous devez avoir au moins une partie terminée pour voir cette statistique.</p>
                 </div>
             </div>
 
@@ -29,7 +29,7 @@
                     </div>
                 </span>
                 <div class="errormsg col-xs-12" ng-show="currentUser.won_game + currentUser.lost_game + currentUser.exaequo == 0 && countTrainings == 0">
-                    <p>Vous devez jouer pour voir ces statistiques.</p>
+                    <p>Vous devez jouer au moins une partie ou un entraînement pour voir ces statistiques.</p>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     </div>
                 </span>
                 <div class="errormsg col-xs-12" ng-hide="trainingStats[0] + trainingStats[1] + trainingStats[2] + trainingStats[3] + trainingStats[4] > 0">
-                    <p>Vous devez jouer au moins une partie entraînement pour voir ces statistiques.</p>
+                    <p>Vous devez jouer au moins un entraînement pour voir ces statistiques.</p>
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                     <span class="number">{{waitingYou}}</span>
                 </span>
                 <div class="errormsg col-xs-12" ng-show="waitingYou == 0">
-                    <p>Cette statistique apparaîtra lorsqu'un joueur jouera contre vous.</p>
+                    <p>Cette statistique apparaîtra lorsqu'un joueur aura joué contre vous.</p>
                 </div>
             </div>
         </div>

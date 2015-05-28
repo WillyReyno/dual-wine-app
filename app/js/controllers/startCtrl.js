@@ -108,6 +108,7 @@ angular.module('dwGame')
 
                     $location.path('/question/' + nextId); // Go to the next question
                     $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
+
                 });
 
             };
@@ -120,14 +121,13 @@ angular.module('dwGame')
                 }
 
                 if ($rootScope.step <= 3) {
-                    if($rootScope.results == true) {
+                    if(result == true) {
                         FlashService.flashTrueAnswer();
                     } else {
                         FlashService.flashFalseAnswer();
                     }
 
                     $rootScope.results.push(result);
-
 
                     $rootScope.step++;
 
