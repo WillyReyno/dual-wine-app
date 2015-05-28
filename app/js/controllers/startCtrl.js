@@ -1,10 +1,10 @@
 angular.module('dwGame')
     .controller('HomeController', ['$scope', '$rootScope', 'QuestionService', function($scope, $rootScope, QuestionService) {
-        QuestionService.getUserGameNotPlayed($rootScope.currentUser.id).then(function(res) {
+        QuestionService.getUserGameNotPlayedAlt($rootScope.currentUser.id).then(function(res) {
             $scope.players = res.data;
         });
 
-        QuestionService.getUserGameWaiting($rootScope.currentUser.id).then(function(res) {
+        QuestionService.getUserGameWaitingAlt($rootScope.currentUser.id).then(function(res) {
             $scope.others = res.data;
         });
     }])
@@ -47,16 +47,16 @@ angular.module('dwGame')
 
                     /* Formating the object with true and false answers */
                     questionJson.question = res.data.question;
-                    var tests = [];
+                    var answers = [];
                     for (var i = 1; i <= 4; i++) {
-                        tests.push({
+                        answers.push({
                             "content":res.data['answer_' + i],
                             "value": i == 1
                         });
                     }
-                    shuffle(tests);
+                    shuffle(answers);
                     $rootScope.currentQuestion = questionJson;
-                    $rootScope.currentAnswers = tests;
+                    $rootScope.currentAnswers = answers;
 
                 });
             };
@@ -108,6 +108,7 @@ angular.module('dwGame')
 
                     $location.path('/question/' + nextId); // Go to the next question
                     $scope.setQuestion(nextId);  // Stock the next question and answers to display them on the next view
+
                 });
 
             };
@@ -120,10 +121,13 @@ angular.module('dwGame')
                 }
 
                 if ($rootScope.step <= 3) {
+                    if(result == true) {
+                        FlashService.flashTrueAnswer();
+                    } else {
+                        FlashService.flashFalseAnswer();
+                    }
+
                     $rootScope.results.push(result);
-
-                    //console.log($rootScope.results);
-
 
                     $rootScope.step++;
 
@@ -191,13 +195,12 @@ angular.module('dwGame')
                         var endTraining = {};
                         endTraining['user_id'] = $rootScope.currentUser.id;
                         endTraining['questions'] = [$rootScope.questions[0].id, $rootScope.questions[1].id, $rootScope.questions[2].id, $rootScope.questions[3].id];
-                        endTraining['users_answers'] = $rootScope.results;
+                        endTraining['user_answers'] = $rootScope.results;
 
-                        QuestionService.endTraining(endTraining).then(function(resTraining) {
-                            FlashService.flashTraining(resTraining.data.score);
+                        QuestionService.endTraining(endTraining).then(function(res) {
+                            FlashService.flashTraining(res.data.correct_answers);
                             $location.path('/');
                         });
-                        console.log(endTraining);
                     }
                 }
             };

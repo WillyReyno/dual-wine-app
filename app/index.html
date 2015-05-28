@@ -13,34 +13,80 @@
 
 </head>
 <body ng-controller="ApplicationController">
-
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
+            <span ng-show="currentUser">
+                <button type="button" class="bars pull-left" id="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </span>
             <a class="navbar-brand" href="#/">Dual Wine</a>
         </div>
-        <ul ng-if="currentUser" class="nav navbar-nav navbar-right">
-
-            <li ><a ng-click="logout()" href="#">Déconnexion</a></li>
-        </ul>
-
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container">
-    <div class="row">
-        <div flash-message="5000"></div>
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li ng-if="currentUser" ng-class="{active:isActive('/')}">
+                <a href="#/" class="navig">Accueil</a>
+            </li>
+            <li ng-if="currentUser" ng-class="{active:isActive('/stats')}">
+                <a href="#/stats" class="navig">Statistiques</a>
+            </li>
+            <li ng-if="currentUser" ng-class="{active:isActive('/ranking')}">
+                <a href="#/ranking" class="navig">Classement</a>
+            </li>
+            <li ng-if="currentUser">
+                <a ng-click="logout()" href="#" class="navig">Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+
+        <div class="container">
+            <div class="row" style="height:50px!important;">
+                <div class="flash" flash-message="5000" style="height:auto;"></div>
+            </div>
+
+            <div class="row">
+                <div ng-view></div>
+            </div>
+
+        </div>
     </div>
 </div>
+<script>
+
+
+    $(document).on('click', '.navig', function(e) {
+        if($("#wrapper").hasClass("toggled")) {
+            e.preventDefault();
+            $("#wrapper").removeClass("toggled");
+        }
+    });
+
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
 
 
 
-<div class="container">
+    $('#page-content-wrapper').click(function(e) {
+        if($("#wrapper").hasClass("toggled")) {
+            e.preventDefault();
+            $("#wrapper").removeClass("toggled");
+        }
+    });
 
-    <div class="row">
-        <div ng-view></div>
-    </div>
-    <br> <!-- TODO rajouer du padding en css -->
+    $('#menucontainer').click(function(event){
+        event.stopPropagation();
+    });
 
-</div>
+</script>
 </body>
 </html>

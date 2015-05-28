@@ -1,0 +1,83 @@
+<div class="col-md-12">
+
+    <div class="col-md-12">
+        <h2>Statistiques</h2>
+        <div stats-directive>
+            <div class="stats col-md-12 clearfix">
+                <h3>Résultats</h3>
+                <span ng-hide="currentUser.won_game + currentUser.lost_game + currentUser.exaequo == 0">
+                    <div class="col-md-3 col-xs-12 col-md-offset-0">
+                        <canvas id="winLoseExChart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="legends" id="legendFirst"></div>
+                    </div>
+                </span>
+                <div class="errormsg col-xs-12" ng-show="currentUser.won_game == 0 && currentUser.lost_game == 0 && currentUser.exaequo == 0">
+                    <p>Vous devez avoir au moins une partie terminée pour voir cette statistique.</p>
+                </div>
+            </div>
+
+            <div class="stats col-md-12 clearfix">
+                <h3>Nombre de parties</h3>
+                <span ng-show="currentUser.won_game + currentUser.lost_game + currentUser.exaequo > 0 || countTrainings > 0">
+                    <div class="col-md-3 col-xs-12 col-md-offset-0">
+                        <canvas id="gameChart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="legends" id="legendSecond"></div>
+                    </div>
+                </span>
+                <div class="errormsg col-xs-12" ng-show="currentUser.won_game + currentUser.lost_game + currentUser.exaequo == 0 && countTrainings == 0">
+                    <p>Vous devez jouer au moins une partie ou un entraînement pour voir ces statistiques.</p>
+                </div>
+            </div>
+
+            <div class="stats col-md-12">
+                <h3>Bonnes réponses (entraînement)</h3>
+                <span ng-show="trainingStats[0] + trainingStats[1] + trainingStats[2] + trainingStats[3] + trainingStats[4] > 0">
+                    <div class="col-md-4 col-xs-12 col-md-offset-4">
+                        <canvas id="waitChart" width="400" height="400"></canvas>
+                    </div>
+                </span>
+                <div class="errormsg col-xs-12" ng-hide="trainingStats[0] + trainingStats[1] + trainingStats[2] + trainingStats[3] + trainingStats[4] > 0">
+                    <p>Vous devez jouer au moins un entraînement pour voir ces statistiques.</p>
+                </div>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Adversaires rencontrés</h3>
+                <span ng-hide="countOpponents == 0">
+                    <span class="number">{{countOpponents}}</span>
+                </span>
+                <div class="errormsg col-xs-12" ng-show="countOpponents == 0">
+                    <p>Vous devez jouer au moins une partie pour voir cette statistique.</p>
+                </div>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Joueurs en attente</h3>
+                <span ng-hide="waitingOther == 0">
+                    <span class="number">{{waitingOther}}</span>
+                </span>
+                <div class="errormsg col-xs-12" ng-show="waitingOther == 0">
+                    <p>Vous devez jouer au moins une partie pour voir cette statistique.</p>
+                </div>
+            </div>
+
+            <div class="stats col-md-3 col-xs-12">
+                <h3>Joueurs qui vous attendent</h3>
+                <span ng-hide="waitingYou == 0">
+                    <span class="number">{{waitingYou}}</span>
+                </span>
+                <div class="errormsg col-xs-12" ng-show="waitingYou == 0">
+                    <p>Cette statistique apparaîtra lorsqu'un joueur aura joué contre vous.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        Chart.defaults.global.responsive = true;
+        Chart.defaults.global.animation = false;
+    </script>
+</div>

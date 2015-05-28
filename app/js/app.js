@@ -2,7 +2,8 @@ angular.module('dwApp', [
     'ngRoute',
     'dwAuth', 'dwGame', 'dwApplication',
     'dwQuestion',
-    'dwValues', 'flash', 'ui.gravatar'])
+    'dwValues', 'flash', 'ui.gravatar',
+    'dwTest'])
     .config(function($httpProvider){
         $httpProvider.interceptors.push([
             '$injector',
@@ -29,6 +30,31 @@ angular.module('dwApp', [
                     templateUrl: 'partials/question.html',
                     controller: 'StartController'
                 }).
+                when('/stats', {
+                    templateUrl: 'partials/stats.html',
+                    resolve: {
+                        countTrainings: function($rootScope, QuestionService) {
+                            return QuestionService.getUserTraining($rootScope.currentUser.id);
+                        },
+                        countOpponents: function($rootScope, QuestionService) {
+                            return QuestionService.getUserOpponents($rootScope.currentUser.id);
+                        },
+                        waitingYou: function($rootScope, QuestionService) {
+                            return QuestionService.getUserGameNotPlayed($rootScope.currentUser.id);
+                        },
+                        waitingOther: function($rootScope, QuestionService) {
+                            return QuestionService.getUserGameWaiting($rootScope.currentUser.id);
+                        },
+                        trainingStats: function($rootScope, QuestionService) {
+                            return QuestionService.getUserTrainingStats($rootScope.currentUser.id);
+                        }
+                    },
+                    controller: 'StatsController'
+                }).
+                when('/ranking', {
+                    templateUrl: 'partials/ranking.html',
+                    controller: 'RankingController'
+                }).
                 otherwise({
                     redirectTo: '/login'
                 });
@@ -40,6 +66,7 @@ angular.module('dwApp', [
             if ( $rootScope.currentUser == null ) {
                 // no logged user, we should be going to #login
                 var part = ["partials/login.html", "partials/register.html"];
+                var ques = ["partials/question.html"];
                 if (part.indexOf(next.templateUrl) !== -1) {
                     // already going to #login, no redirect needed
                 } else {
@@ -47,12 +74,6 @@ angular.module('dwApp', [
                     $location.path( "/" );
                 }
             }
-
-            //if($rootScope.currentUser) {
-            //    if(next.templateUrl == "partials/home.html") {
-            //        $location.path("/")
-            //    }
-            //}
         });
     });
 
@@ -60,3 +81,4 @@ angular.module("dwApplication", []);
 angular.module("dwAuth", []);
 angular.module("dwGame", []);
 angular.module("dwQuestion", []);
+angular.module("dwTest", []);

@@ -18,7 +18,8 @@ gulp.task('modules', function(){
     return gulp.src(['node_modules/jquery/dist/jquery.min.js', 'node_modules/angular/angular.min.js',
         'node_modules/angular-route/angular-route.min.js', 'node_modules/angular-route/angular-route.min.js',
         'node_modules/angular-resource/angular-resource.min.js', 'node_modules/angular-ui-router/release/angular-ui-router.min.js',
-        'node_modules/angular-flash-alert/dist/angular-flash.min.js', 'node_modules/angular-gravatar/build/angular-gravatar.min.js'
+        'node_modules/angular-flash-alert/dist/angular-flash.min.js', 'node_modules/angular-gravatar/build/angular-gravatar.min.js',
+        'node_modules/chart.js/Chart.min.js'
     ])
         .pipe(gp_concat('concat_modules.js'))
         .pipe(gulp.dest('vendors'));

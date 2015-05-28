@@ -1,73 +1,3 @@
-/*
-
-To get this list of colors inject jQuery at http://www.google.com/design/spec/style/color.html#color-color-palette
-
-Then, run this script to get the list.
-
-
-(function() {
-  var colors = {}, main = {};
-  $(".color-group").each(function() {
-    var color = $(this).find(".name").text().trim().toLowerCase().replace(" ", "-");
-    colors[color] = {};
-
-    $(this).find(".color").not(".main-color").each(function() {
-      var shade = $(this).find(".shade").text().trim(),
-          hex   = $(this).find(".hex").text().trim();
-
-      colors[color][shade] = hex;
-    });
-    main[color] = color + "-" + $(this).find(".main-color .shade").text().trim();
-
-  });
-  var LESS = "";
-  $.each(colors, function(name, shades) {
-    LESS += "\n\n";
-    $.each(shades, function(shade, hex) {
-      LESS += "@" + name + "-" + shade + ": " + hex + ";\n";
-    });
-    if (main[name]) {
-      LESS += "@" + name + ": " + main[name] + ";\n";
-    }
-  });
-  console.log(LESS);
-})();
-
-
-
-*/
-
-/* Default colors
-
-@background: #eeeeee;
-
-@primary : #009688;
-@primaryHover : #00aa9a;
-@primaryActive: #00b5a4;
-
-@black : #000000;
-@white : #ffffff;
-
-@inverse : #3f51b5;
-@inverseActive: #5062c2;
-
-@success : #4caf50;
-@successHover : #59b75c;
-@successActive: #60ba63;
-
-@info: #03a9f4;
-@infoHover: #0fb2fc;
-@infoActive: #19b6fc;
-
-@warning: #ff5722;
-@warningHover: #ff6736;
-@warningActive: #ff6e41;
-
-@danger: #f44336;
-@dangerHover: #f55549;
-@dangerActive: #f65e53;
- */
-
 @abackground: #efe4d0; //background
 @main: #8a1e3e; // main
 @button: #c13645; //button
@@ -93,9 +23,9 @@ Then, run this script to get the list.
 @infoHover: #0fb2fc;
 @infoActive: #19b6fc;
 
-@warning: #ff5722;
-@warningHover: #ff6736;
-@warningActive: #ff6e41;
+@warning: #d65c4f;
+@warningHover: lighten(@warning, 20%);
+@warningActive: lighten(@warning, 25%);
 
 @danger: #f44336;
 @dangerHover: #f55549;

@@ -18,7 +18,7 @@ angular.module('dwApplication')
         /* Login */
 
         flashService.flashFailLogin = function() {
-            var message = '<strong>Connexion échouée</strong>, votre identifiant ou votre mot de pass est erroné.';
+            var message = '<strong>Connexion échouée</strong>, votre identifiant ou votre mot de passe est erroné.';
             Flash.create('danger', message);
         };
 
@@ -73,8 +73,26 @@ angular.module('dwApplication')
         };
 
         flashService.flashTraining = function(score) {
-            var message = 'Vous avez obtenu un score de '+ score +' !';
+            var message = "";
+            if(score == 0) {
+                message = 'Vous n\'avez trouvé aucune bonne réponse.';
+            } else if(score == 1) {
+                message = 'Vous avez trouvé '+ score +' bonne réponse !';
+            } else {
+                message = 'Vous avez trouvé '+ score +' bonnes réponses !';
+            }
+
             Flash.create('info', message);
+        };
+
+        flashService.flashTrueAnswer = function() {
+            var message = "Bonne réponse !";
+            Flash.create('success', message);
+        };
+
+        flashService.flashFalseAnswer = function() {
+            var message = "Mauvaise réponse !";
+            Flash.create('danger', message);
         };
 
         return flashService;

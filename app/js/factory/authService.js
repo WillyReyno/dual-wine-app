@@ -14,21 +14,17 @@ angular.module('dwAuth')
                     }
                 })
                 .error(function(data, status, headers, config) {
-                    console.log("erreur");
-                    //TODO en cas d'erreur => afficher une div ng-hide avec "erreur lors de l'envoi de vos identifiants"
+                    //TODO Mettre un message Flash d'erreur générique ?
                 })
         };
 
         authService.register = function(crendentials) {
             return $http.post(apiRegister, crendentials)
                 .success(function(data, status, headers, config) {
-                    console.log('success');
-                    console.log(data);
                     $location.path('/');
                 })
                 .error(function(data, status, headers, config) {
-                    console.log('error');
-                    console.log(data);
+                    // ?
                 })
         };
 
