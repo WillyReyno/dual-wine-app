@@ -8,7 +8,7 @@
                     <th>Victoires</th>
                     <th>Défaites</th>
                     <th>Exaequo</th>
-                    <th>Ratio</th>
+                    <!--<th>Ratio</th>-->
                 </tr>
 
                 <tr ng-repeat="user in ranking">
@@ -16,9 +16,10 @@
                     <td>{{user.won_game}}</td>
                     <td>{{user.lost_game}}</td>
                     <td>{{user.exaequo}}</td>
-                    <td>{{(user.won_game / (user.won_game + user.lost_game + user.exaequo)) * 100 | number:0}} %</td>
+                    <!--<td>{{(user.won_game|num / (user.won_game|num + user.lost_game|num + user.exaequo|num)) * 100 | number:0}} %</td>-->
                 </tr>
             </table>
         </div>
     </div>
 </div>
+

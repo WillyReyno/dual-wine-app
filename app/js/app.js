@@ -66,6 +66,7 @@ angular.module('dwApp', [
             if ( $rootScope.currentUser == null ) {
                 // no logged user, we should be going to #login
                 var part = ["partials/login.html", "partials/register.html"];
+                var ques = ["partials/question.html"];
                 if (part.indexOf(next.templateUrl) !== -1) {
                     // already going to #login, no redirect needed
                 } else {

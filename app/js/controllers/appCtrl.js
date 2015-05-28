@@ -17,9 +17,8 @@ angular.module('dwApplication')
             $scope.setCurrentUser = function(user) {
 
                 if (user == null) {
-
                     sessionStorage.removeItem("user");
-
+                    $rootScope.currentUser = user;
                 } else {
                     sessionStorage.setItem("user", JSON.stringify(user));
                     var user_json = sessionStorage.getItem("user");
@@ -37,8 +36,9 @@ angular.module('dwApplication')
                 FlashService.dismiss();
 
                 $scope.setCurrentUser(null);
-
                 $location.path('/login');
+
+
             };
 
             $scope.isActive = function(route) {

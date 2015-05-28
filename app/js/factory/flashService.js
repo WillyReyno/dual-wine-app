@@ -18,7 +18,7 @@ angular.module('dwApplication')
         /* Login */
 
         flashService.flashFailLogin = function() {
-            var message = '<strong>Connexion échouée</strong>, votre identifiant ou votre mot de pass est erroné.';
+            var message = '<strong>Connexion échouée</strong>, votre identifiant ou votre mot de passe est erroné.';
             Flash.create('danger', message);
         };
 
