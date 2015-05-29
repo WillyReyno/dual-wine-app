@@ -17,7 +17,6 @@ angular.module('dwGame')
     }])
     .controller('StartController', ['$scope', '$rootScope', 'QuestionService', '$location', 'FlashService',
         function ($scope, $rootScope, QuestionService, $location, FlashService) {
-
             $scope.reloadStats = function() {
                 QuestionService.getWinLoseEx($rootScope.currentUser.id).then(function(res) {
                     $rootScope.currentUser.won_game =  res.data.won_game;
