@@ -1,16 +1,30 @@
 angular.module('dwGame')
-    .controller('HomeController', ['$scope', '$rootScope', 'QuestionService', function($scope, $rootScope, QuestionService) {
-        QuestionService.getUserGameNotPlayedAlt($rootScope.currentUser.id).then(function(res) {
-            $scope.players = res.data;
-        });
+    .controller('HomeController', ['$scope', '$rootScope', 'QuestionService',
+        function($scope, $rootScope, QuestionService) {
 
-        QuestionService.getUserGameWaitingAlt($rootScope.currentUser.id).then(function(res) {
-            $scope.others = res.data;
-        });
+
+        if($rootScope.currentUser) {
+
+            QuestionService.getUserGameNotPlayedAlt($rootScope.currentUser.id).then(function(res) {
+                $scope.players = res.data;
+            });
+
+            QuestionService.getUserGameWaitingAlt($rootScope.currentUser.id).then(function(res) {
+                $scope.others = res.data;
+            });
+
+        }
     }])
     .controller('StartController', ['$scope', '$rootScope', 'QuestionService', '$location', 'FlashService',
         function ($scope, $rootScope, QuestionService, $location, FlashService) {
 
+            $scope.reloadStats = function() {
+                QuestionService.getWinLoseEx($rootScope.currentUser.id).then(function(res) {
+                    $rootScope.currentUser.won_game =  res.data.won_game;
+                    $rootScope.currentUser.lost_game =  res.data.lost_game;
+                    $rootScope.currentUser.exaequo = res.data.exaequo;
+                });
+            };
 
             /* Get the next question's id */
 
@@ -154,6 +168,7 @@ angular.module('dwGame')
                                 FlashService.flashPending(res.data.username);
                             });
 
+                            $scope.reloadStats();
                             $location.path('/');
                         });
 
@@ -186,7 +201,7 @@ angular.module('dwGame')
                                         FlashService.flashLoser(res.data.username);
                                     });
                                 }
-
+                                $scope.reloadStats();
                                 $location.path('/');
 
                             });
@@ -199,6 +214,7 @@ angular.module('dwGame')
 
                         QuestionService.endTraining(endTraining).then(function(res) {
                             FlashService.flashTraining(res.data.correct_answers);
+                            $scope.reloadStats();
                             $location.path('/');
                         });
                     }

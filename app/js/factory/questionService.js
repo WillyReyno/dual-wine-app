@@ -139,6 +139,16 @@ angular.module('dwQuestion')
                     })
             };
 
+            questionService.getWinLoseEx = function(id) {
+                return $http.get(apiUser+id)
+                    .success(function(data, status, headers, config) {
+                        return data.username;
+                    })
+                    .error(function(data, status, headers, config){
+                        // TODO Do something on error
+                    })
+            };
+
             questionService.getRanking = function() {
                 return $http.get(apiBestPlayers)
                     .success(function(data, status, headers, config) {
